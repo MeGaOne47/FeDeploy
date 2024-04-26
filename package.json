@@ -10,7 +10,7 @@
   },
   "proxy": {
     "/": {
-      "target": "http://localhost:3001",
+      "target": "https://be-deploy-eight.vercel.app",
       "changeOrigin": true
     }
   },

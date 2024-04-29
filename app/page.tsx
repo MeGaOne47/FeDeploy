@@ -35,7 +35,8 @@ const Home = () => {
 
   return (
     <div style={{ padding: '20px' }}>
-      <h1>File List</h1>
+      <h1>Hung Nguyen</h1>
+      <h2>File List</h2>
       <Link href="/UploadPage" color='red'>Upload Image</Link>
       <List
         bordered

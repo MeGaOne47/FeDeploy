@@ -1,5 +1,7 @@
 import FooterComponent from "@/components/Layout/footer";
 import HeaderComponent from "@/components/Layout/header";
+import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import 'react-toastify/dist/ReactToastify.css';
@@ -9,10 +11,10 @@ const inter = Inter({ subsets: ["latin"] });
 const metadataBase = new URL("https://www.vjp-connect.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Flogobanner.dcf00dbd.png&w=3840&q=75");
 
 export const metadata: Metadata = {
-  title: "Hung Nguyen - Deploy dự án",
+  title: "Hung Nguyen",
   description: "Hung Nguyen - VJC thực tập",
   openGraph: {
-    title: 'Hung Nguyen - Deploy dự án',
+    title: 'Hung Nguyen',
     description: 'Hung Nguyen - VJC thực tập',
     type: 'website',
     images: [
@@ -33,12 +35,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={inter.className}>
+    <div lang="en" className={inter.className}>
       <HeaderComponent/>
         {children}
+        <SpeedInsights/>
+        <Analytics />
       <FooterComponent/>
-      </body>
-    </html>
+    </div>
   );
 }

@@ -34,11 +34,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <HeaderComponent/>
       <body className={inter.className}>
+      <HeaderComponent/>
         {children}
-      </body>
       <FooterComponent/>
+      </body>
     </html>
   );
 }

@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { List, Button, message } from 'antd';
 import axios from 'axios';
 import { SERVER_DOMAIN } from './constants';
-import Link from 'next/link';
+import Link from 'antd/es/typography/Link';
 
 const Home = () => {
   const [files, setFiles] = useState([]);

@@ -4,6 +4,8 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const inter = Inter({ subsets: ["latin"] });
 
+const metadataBase = new URL("https://www.vjp-connect.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Flogobanner.dcf00dbd.png&w=3840&q=75");
+
 export const metadata: Metadata = {
   title: "Deploy dự án",
   description: "VJC thực tập",
@@ -20,6 +22,7 @@ export const metadata: Metadata = {
       },
     ],
   },
+  metadataBase: metadataBase,
 };
 
 export default function RootLayout({

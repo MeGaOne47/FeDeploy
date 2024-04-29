@@ -2,17 +2,23 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import 'react-toastify/dist/ReactToastify.css';
 
-export const openGraphImage = { images: ['https://www.vjp-connect.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Flogobanner.dcf00dbd.png&w=1200&q=75'] }
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Deploy dự án",
   description: "VJC thực tập",
   openGraph: {
-    title: 'Học Nextjs 14',
-    description: 'Nâng cao kỹ năng lập trình và tiến bộ hơn trong tương lai.',
+    title: 'Deploy dự án',
+    description: 'VJC thực tập',
     type: 'website',
-    ...openGraphImage,
+    images: [
+      {
+        url: '../image/logobanner.png', // Đường dẫn tương đối đến hình ảnh
+        width: 1200,
+        height: 630,
+        alt: 'Mô tả cho hình ảnh',
+      },
+    ],
   },
 };
 

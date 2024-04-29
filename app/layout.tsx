@@ -13,14 +13,6 @@ export const metadata: Metadata = {
     title: 'Deploy dự án',
     description: 'VJC thực tập',
     type: 'website',
-    images: [
-      {
-        url: '../image/logobanner.png', // Đường dẫn tương đối đến hình ảnh
-        width: 1200,
-        height: 630,
-        alt: 'Mô tả cho hình ảnh',
-      },
-    ],
   },
   metadataBase: metadataBase,
 };

@@ -1,7 +1,7 @@
-import { Layout, Menu } from 'antd';
+import { Menu } from 'antd';
+import { Header } from 'antd/es/layout/layout';
 import Link from 'next/link';
 
-const { Header } = Layout;
 
 const HeaderComponent = () => {
   return (

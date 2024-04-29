@@ -1,6 +1,5 @@
-import { Layout } from 'antd';
+import { Footer } from "antd/es/layout/layout";
 
-const { Footer } = Layout;
 
 const FooterComponent = () => {
   return (

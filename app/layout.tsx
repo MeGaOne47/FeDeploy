@@ -35,12 +35,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <div lang="en" className={inter.className}>
-      <HeaderComponent/>
-        {children}
-        <SpeedInsights/>
-        <Analytics />
-      <FooterComponent/>
-    </div>
+    <html>
+      <body>
+        <div lang="en" className={inter.className}>
+          <HeaderComponent/>
+            {children}
+            <SpeedInsights/>
+            <Analytics />
+          <FooterComponent/>
+        </div>
+      </body>
+    </html>
   );
 }

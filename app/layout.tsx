@@ -6,8 +6,6 @@ import { Inter } from "next/font/google";
 
 const inter = Inter({ subsets: ["latin"] });
 
-const metadataBase = new URL("https://www.vjp-connect.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Flogobanner.dcf00dbd.png&w=3840&q=75");
-
 export const metadata: Metadata = {
   title: "Hung Nguyen",
   description: "Hung Nguyen - VJC thực tập",
@@ -24,7 +22,6 @@ export const metadata: Metadata = {
       },
     ],
   },
-  metadataBase: metadataBase,
 };
 
 export default function RootLayout({
@@ -37,7 +34,7 @@ export default function RootLayout({
       <meta name="google-site-verification" content="nmnsgjnJTG_EFzE9fyE8eVRXVSMix03TWrG4UqMj95E" />
       <body>
         <div lang="en" className={inter.className}>
-          <HeaderComponent/>
+          {/* <HeaderComponent/> */}
             {children}
             <SpeedInsights/>
           <FooterComponent/>

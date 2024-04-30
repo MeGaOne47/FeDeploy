@@ -19,7 +19,6 @@ function List_Image() {
         const response = await axios.get(`${SERVER_DOMAIN}/list`);
         setFiles(response.data);
         } catch (error) {
-        console.error(error);
         message.error('Failed to fetch files');
         }
     };
@@ -30,40 +29,58 @@ function List_Image() {
         message.success('File deleted successfully');
         fetchFiles();
         } catch (error) {
-        console.error(error);
         message.error('Failed to delete file');
         }
     };
 
     return(
         <>
-            <h2>File List</h2>
-            <Button type="dashed">
-                <Link href="/UploadPage" color='red'>
-                Upload Image
-                </Link>
-            </Button>
-
-            <List
-                bordered
-                dataSource={files}
-                renderItem={(item) => (
-                <List.Item
-                    actions={[
-                    <Button
-                        type="primary"
-                        onClick={() => handleDelete(item)}
-                    >
-                        Delete
-                    </Button>
-                    ]}
+            <div
+                style={{
+                    width: '100%',
+                    marginBottom: '10px',
+                }}
+            >
+                <div
+                    style={{
+                        width: '100%',
+                        textAlign: 'center',
+                        marginBottom: '10px',
+                    }}
                 >
-                    <List.Item.Meta
-                    title={<a href={`${SERVER_DOMAIN}/download/${item}`}>{item}</a>}
-                    />
-                </List.Item>
-                )}
-            />
+                    <h2>File List</h2>
+                    <Button style={{marginBottom: '10px'}} type="dashed">
+                        <Link href="/UploadPage" color='red'>
+                        Upload Image
+                        </Link>
+                    </Button>
+                </div>
+                <List
+                    style={{
+                        width: '50%',
+                        margin: 'auto',
+                        border: '1px solid #ccc',
+                    }}
+                    bordered
+                    dataSource={files}
+                    renderItem={(item) => (
+                        <List.Item
+                            actions={[
+                            <Button
+                                type="primary"
+                                onClick={() => handleDelete(item)}
+                            >
+                                Delete
+                            </Button>
+                            ]}
+                        >
+                            <List.Item.Meta
+                                title={<a href={`${SERVER_DOMAIN}/download/${item}`}>{item}</a>}
+                            />
+                        </List.Item>
+                    )}
+                />
+            </div>
         </>
     )
 }

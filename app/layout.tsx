@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     type: 'website',
     images: [
       {
-        url: 'https://www.vjp-connect.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Flogobanner.dcf00dbd.png&w=3840&q=75', // Đường dẫn tương đối đến hình ảnh
+        url: 'https://www.vjp-connect.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Flogobanner.dcf00dbd.png&w=3840&q=75',
         width: 1200,
         height: 630,
         alt: 'Hung Nguyen - Dự án deploy thực tập',
@@ -34,7 +34,7 @@ export default function RootLayout({
       <meta name="google-site-verification" content="nmnsgjnJTG_EFzE9fyE8eVRXVSMix03TWrG4UqMj95E" />
       <body>
         <div lang="en" className={inter.className}>
-          {/* <HeaderComponent/> */}
+          <HeaderComponent/>
             {children}
             <SpeedInsights/>
           <FooterComponent/>

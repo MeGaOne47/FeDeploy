@@ -9,7 +9,7 @@ import Upload from "antd/es/upload";
 import Button from "antd/es/button";
 
 function Select_File_Upload() {
-    const [file, setFile] = useState<RcFile | null>(null); // Sửa đổi kiểu của file thành RcFile | null
+    const [file, setFile] = useState<RcFile | null>(null);
 
     const handleUpload = async () => {
         if (!file) {
@@ -28,9 +28,13 @@ function Select_File_Upload() {
         });
         message.success('File uploaded successfully');
         } catch (error) {
-        console.error(error);
         message.error('Failed to upload file');
         }
+    };
+
+    const beforeUpload = (file: RcFile) => {
+        setFile(file);
+        return false;
     };
 
     return(
@@ -38,10 +42,7 @@ function Select_File_Upload() {
             <h2>Upload File</h2>
             <Upload
                 accept=".png,.jpeg,.jpg"
-                beforeUpload={(file) => {
-                setFile(file); // Sửa đổi thành setFile(file) thay vì setFile(file.name)
-                return false;
-                }}
+                beforeUpload={beforeUpload}
             >
                 <Button icon={<UploadOutlined />}>Select File</Button>
             </Upload>
@@ -50,11 +51,11 @@ function Select_File_Upload() {
                 type="primary"
                 style={{ marginTop: '10px' }}
                 onClick={handleUpload}
+                disabled={!file}
             >
                 Upload
             </Button>
         </>
     )
-    
 }
 export default Select_File_Upload;

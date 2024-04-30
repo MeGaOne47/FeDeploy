@@ -5,7 +5,7 @@ const Home = () => {
 
   return (
     <div style={{ padding: '20px' }}>
-      <h1>Hung Nguyen</h1>
+      <h1 style={{ textAlign: 'center' }}>Hung Nguyen</h1>
       <List_Image/>
     </div>
   );

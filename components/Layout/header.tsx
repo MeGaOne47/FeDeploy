@@ -1,35 +1,56 @@
 "use client"
 import React from 'react';
-import { Menu } from 'antd';
 import { MailOutlined, AppstoreOutlined, SettingOutlined } from '@ant-design/icons';
+import Menu from 'antd/es/menu/menu';
 
 const HeaderComponent: React.FC = () => {
+  const menuItems = [
+    {
+      key: 'mail',
+      icon: <MailOutlined />,
+      label: 'Navigation One',
+    },
+    {
+      key: 'app',
+      icon: <AppstoreOutlined />,
+      label: 'Navigation Two',
+      disabled: true,
+    },
+    {
+      key: 'SubMenu',
+      icon: <SettingOutlined />,
+      label: 'Navigation Three - Submenu',
+      children: [
+        {
+          type: 'group',
+          label: 'Item 1',
+          children: [
+            { label: 'Option 1', key: 'setting:1' },
+            { label: 'Option 2', key: 'setting:2' },
+          ],
+        },
+        {
+          type: 'group',
+          label: 'Item 2',
+          children: [
+            { label: 'Option 3', key: 'setting:3' },
+            { label: 'Option 4', key: 'setting:4' },
+          ],
+        },
+      ],
+    },
+    {
+      key: 'alipay',
+      label: (
+        <a href="https://ant.design" target="_blank" rel="noopener noreferrer">
+          Navigation Four - Link
+        </a>
+      ),
+    },
+  ];
+
   return (
-    <>
-      <Menu mode="horizontal">
-        <Menu.Item key="mail" icon={<MailOutlined />}>
-          Navigation One
-        </Menu.Item>
-        <Menu.Item key="app" icon={<AppstoreOutlined />} disabled>
-          Navigation Two
-        </Menu.Item>
-        <Menu.SubMenu key="SubMenu" icon={<SettingOutlined />} title="Navigation Three - Submenu">
-          <Menu.ItemGroup title="Item 1">
-            <Menu.Item key="setting:1">Option 1</Menu.Item>
-            <Menu.Item key="setting:2">Option 2</Menu.Item>
-          </Menu.ItemGroup>
-          <Menu.ItemGroup title="Item 2">
-            <Menu.Item key="setting:3">Option 3</Menu.Item>
-            <Menu.Item key="setting:4">Option 4</Menu.Item>
-          </Menu.ItemGroup>
-        </Menu.SubMenu>
-        <Menu.Item key="alipay">
-          <a href="https://ant.design" target="_blank" rel="noopener noreferrer">
-            Navigation Four - Link
-          </a>
-        </Menu.Item>
-      </Menu>
-    </>
+    <Menu mode="horizontal" items={menuItems} />
   );
 };
 

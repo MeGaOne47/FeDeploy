@@ -1,8 +1,11 @@
+'use client'
 import { useEffect, useState } from 'react';
-import { List, Button, message } from 'antd';
 import axios from 'axios';
 import { SERVER_DOMAIN } from '../../app/constants';
-import Link from 'antd/es/typography/Link';
+import Link from 'next/link';
+import message from 'antd/es/message';
+import List from 'antd/es/list';
+import Button from 'antd/es/button';
 
 function List_Image() {
     const [files, setFiles] = useState([]);

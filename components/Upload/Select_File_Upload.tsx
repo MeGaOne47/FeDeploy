@@ -1,9 +1,12 @@
+'use client'
 import { useState } from "react";
-import { Upload, Button, message } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
 import axios from 'axios';
 import { RcFile } from 'antd/lib/upload/interface'; // Thêm dòng này để import RcFile
 import { SERVER_DOMAIN } from '../../app/constants';
+import message from "antd/es/message";
+import Upload from "antd/es/upload";
+import Button from "antd/es/button";
 
 function Select_File_Upload() {
     const [file, setFile] = useState<RcFile | null>(null); // Sửa đổi kiểu của file thành RcFile | null

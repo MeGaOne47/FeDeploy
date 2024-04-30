@@ -1,4 +1,3 @@
-"use client"
 import List_Image from "@/components/List_Image/List_Image";
 
 const Home = () => {

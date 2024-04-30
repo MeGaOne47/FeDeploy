@@ -1,6 +1,5 @@
 import FooterComponent from "@/components/Layout/footer";
 import HeaderComponent from "@/components/Layout/header";
-import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
@@ -42,7 +41,6 @@ export default function RootLayout({
           <HeaderComponent/>
             {children}
             <SpeedInsights/>
-            <Analytics />
           <FooterComponent/>
         </div>
       </body>

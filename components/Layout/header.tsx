@@ -1,10 +1,10 @@
 "use client"
-import React from 'react';
+import React, { useMemo } from 'react';
 import { MailOutlined, AppstoreOutlined, SettingOutlined } from '@ant-design/icons';
 import Menu from 'antd/es/menu/menu';
 
 const HeaderComponent: React.FC = () => {
-  const menuItems = [
+  const menuItems = useMemo(() => [
     {
       key: 'mail',
       icon: <MailOutlined />,
@@ -47,7 +47,7 @@ const HeaderComponent: React.FC = () => {
         </a>
       ),
     },
-  ];
+  ], []);
 
   return (
     <Menu mode="horizontal" items={menuItems} />

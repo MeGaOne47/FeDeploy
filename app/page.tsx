@@ -1,5 +1,5 @@
-import List_Image from "@/components/List_Image/List_Image";
-
+import dynamic from 'next/dynamic';
+const List_Image = dynamic(() => import('@/components/List_Image/List_Image'));
 const Home = () => {
 
   return (

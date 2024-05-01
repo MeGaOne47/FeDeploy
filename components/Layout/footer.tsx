@@ -1,3 +1,4 @@
+'use client'
 import React from 'react';
 import { FacebookOutlined, GithubOutlined, YoutubeOutlined } from '@ant-design/icons';
 

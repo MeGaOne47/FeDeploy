@@ -1,5 +1,6 @@
 "use client"
-import Select_File_Upload from '@/components/Upload/Select_File_Upload';
+import dynamic from 'next/dynamic';
+const Select_File_Upload = dynamic(() => import('@/components/Upload/Select_File_Upload'));
 
 const UploadPage = () => {
 

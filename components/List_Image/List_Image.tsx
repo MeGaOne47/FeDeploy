@@ -86,7 +86,7 @@ function List_Image() {
                                 type="primary"
                                 onClick={() => handleView(item)}
                             >
-                                View
+                                <a href={`${handleView}`}>View</a>
                             </Button>
                             ]}
                             

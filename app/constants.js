@@ -1,1 +1,1 @@
-export const SERVER_DOMAIN = 'https://be-deploy-eight.vercel.app';
+export const SERVER_DOMAIN = 'https://be-deploy.vercel.app';

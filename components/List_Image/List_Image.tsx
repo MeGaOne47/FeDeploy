@@ -33,6 +33,16 @@ function List_Image() {
         }
     };
 
+    const handleView = async (filename: any) => {
+        try {
+        await axios.get(`${SERVER_DOMAIN}/view/${filename}`);
+        message.success('File view successfully');
+        fetchFiles();
+        } catch (error) {
+        message.error('Failed to view file');
+        }
+    };
+
     return(
         <>
             <div
@@ -71,8 +81,15 @@ function List_Image() {
                                 onClick={() => handleDelete(item)}
                             >
                                 Delete
+                            </Button>,
+                            <Button
+                                type="primary"
+                                onClick={() => handleView(item)}
+                            >
+                                View
                             </Button>
                             ]}
+                            
                         >
                             <List.Item.Meta
                                 title={<a href={`${SERVER_DOMAIN}/download/${item}`}>{item}</a>}

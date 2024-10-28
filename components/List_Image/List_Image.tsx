@@ -33,16 +33,6 @@ function List_Image() {
         }
     };
 
-    const handleView = async (filename: any) => {
-        try {
-        await axios.get(`${SERVER_DOMAIN}/view/${filename}`);
-        message.success('File view successfully');
-        fetchFiles();
-        } catch (error) {
-        message.error('Failed to view file');
-        }
-    };
-
     return(
         <>
             <div
@@ -84,9 +74,8 @@ function List_Image() {
                             </Button>,
                             <Button
                                 type="primary"
-                                onClick={() => handleView(item)}
                             >
-                                <a href={`${handleView}`}>View</a>
+                                <a href={`${SERVER_DOMAIN}/view/${item}`}>View</a>
                             </Button>
                             ]}
                             

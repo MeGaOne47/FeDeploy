@@ -6,6 +6,7 @@ import Link from 'next/link';
 import message from 'antd/es/message';
 import List from 'antd/es/list';
 import Button from 'antd/es/button';
+import { Modal } from 'antd';
 
 function List_Image() {
     const [files, setFiles] = useState([]);
@@ -23,14 +24,32 @@ function List_Image() {
         }
     };
 
+    // const handleDelete = async (filename: any) => {
+    //     try {
+    //     await axios.delete(`${SERVER_DOMAIN}/delete/${filename}`);
+    //     message.success('File deleted successfully');
+    //     fetchFiles();
+    //     } catch (error) {
+    //     message.error('Failed to delete file');
+    //     }
+    // };
+
     const handleDelete = async (filename: any) => {
-        try {
-        await axios.delete(`${SERVER_DOMAIN}/delete/${filename}`);
-        message.success('File deleted successfully');
-        fetchFiles();
-        } catch (error) {
-        message.error('Failed to delete file');
-        }
+        Modal.confirm({
+            title: 'Bạn có chắc chắn muốn xóa file này không?',
+            content: 'Hành động này không thể hoàn tác',
+            okText: 'Xóa',
+            cancelText: 'Hủy',
+            onOk: async () => {
+                try {
+                    await axios.delete(`${SERVER_DOMAIN}/delete/${filename}`);
+                    message.success('File đã xóa thành công');
+                    fetchFiles();
+                } catch (error) {
+                    message.error('Không thể xóa file');
+                }
+            },
+        });
     };
 
     return(

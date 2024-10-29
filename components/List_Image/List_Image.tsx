@@ -86,7 +86,8 @@ function List_Image() {
                         <List.Item
                             actions={[
                             <Button
-                                type="primary"
+                                type="dashed" 
+                                danger
                                 onClick={() => handleDelete(item)}
                             >
                                 Delete

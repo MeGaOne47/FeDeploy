@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     type: 'website',
     images: [
       {
-        url: 'https://www.vjp-connect.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Flogobanner.dcf00dbd.png&w=3840&q=75',
+        url: 'https://be-deploy.vercel.app/view/car-1.jpg',
         width: 1200,
         height: 630,
         alt: 'Hung Nguyen - Dự án deploy thực tập',

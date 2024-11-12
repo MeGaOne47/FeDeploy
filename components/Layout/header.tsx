@@ -76,6 +76,7 @@ const HeaderComponent: React.FC = () => {
           <li><a href="#KyNang" className="hover:text-gray-300">Kỹ năng</a></li>
           <li><a href="#KinhNghiem" className="hover:text-gray-300">Kinh nghiệm</a></li>
           <li><a href="#DuAn" className="hover:text-gray-300">Dự án</a></li>
+          <li><a target="_blank" href="https://www.topcv.vn/xem-cv/VAECA1MAB1cFCQcCUQ9UXVcDAgQBAQYOWgNUBA825a" className="hover:text-gray-300">CV của tôi</a></li>
         </ul>
         <div className="sm:hidden">
           <button onClick={toggleMenu} aria-label="Mở menu" className="hover:text-gray-300">
@@ -92,6 +93,7 @@ const HeaderComponent: React.FC = () => {
           <li><a href="#KyNang" className="hover:text-gray-300">Kỹ năng</a></li>
           <li><a href="#KinhNghiem" className="hover:text-gray-300">Kinh nghiệm</a></li>
           <li><a href="#DuAn" className="hover:text-gray-300">Dự án</a></li>
+          <li><a target="_blank" href="https://www.topcv.vn/xem-cv/VAECA1MAB1cFCQcCUQ9UXVcDAgQBAQYOWgNUBA825a" className="hover:text-gray-300">CV của tôi</a></li>
         </ul>
       )}
     </header>

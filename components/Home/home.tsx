@@ -22,7 +22,7 @@ export default function HomeIndex() {
           <ul className="grid grid-cols-2 md:grid-cols-4 gap-4">
             <li className="p-4 bg-white rounded-lg shadow-md">ReactJS</li>
             <li className="p-4 bg-white rounded-lg shadow-md">Next.js</li>
-            <li className="p-4 bg-white rounded-lg shadow-md">JavaScript/TypeScript</li>
+            <li className="p-4 bg-white rounded-lg shadow-md">JavaScript, TypeScript</li>
             <li className="p-4 bg-white rounded-lg shadow-md">HTML, CSS, Tailwind CSS</li>
             <li className="p-4 bg-white rounded-lg shadow-md">Lavarel</li>
             <li className="p-4 bg-white rounded-lg shadow-md">PHP</li>

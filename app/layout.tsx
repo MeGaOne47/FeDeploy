@@ -1,7 +1,7 @@
 import dynamic from 'next/dynamic';
 const HeaderComponent = dynamic(() => import('@/components/Layout/header'));
 const FooterComponent = dynamic(() => import('@/components/Layout/footer'));
-import { SpeedInsights } from "@vercel/speed-insights/next";
+// import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import '@/app/globals.css';
@@ -38,7 +38,7 @@ export default function RootLayout({
         <div className={inter.className}>
           <HeaderComponent/>
             {children}
-            <SpeedInsights/>
+            {/* <SpeedInsights/> */}
           <FooterComponent/>
         </div>
       </body>

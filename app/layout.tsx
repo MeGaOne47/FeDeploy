@@ -31,7 +31,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="vn">
+    <html lang="vi">
       <meta name="google-site-verification" content="nmnsgjnJTG_EFzE9fyE8eVRXVSMix03TWrG4UqMj95E" />
       <link rel="icon" href="https://be-deploy.vercel.app/view/car-1.jpg" sizes="any" />
       <body>

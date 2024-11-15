@@ -1,15 +1,19 @@
 import Contact from "@/components/Contact/Contact";
 import About from "../About/about";
+import Image from 'next/image';
 
 export default function HomeIndex() {
   return (
     <div className="min-h-screen bg-gray-100 text-gray-900">
       <main className="max-w-7xl mx-auto p-6">
       <section className="flex items-center justify-center mt-10 space-x-6">
-        <img 
+        <Image 
           src="https://be-deploy.vercel.app/view/bqUDplfbEyqCOCwLOdJV_65df3162143f9_cvtpl.jpg" 
           alt="Avatar của Nguyễn Tấn Hùng" 
           className="w-32 h-32 rounded-full shadow-lg"
+          width={500}
+          height={300}
+          priority
         />
         <div className="text-left">
           <h1 className="text-4xl font-bold mb-2">Chào mừng đến với Portfolio của tôi!</h1>

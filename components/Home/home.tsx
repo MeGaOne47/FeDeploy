@@ -65,14 +65,14 @@ export default function HomeIndex() {
             <div className="bg-white p-6 rounded-lg shadow-lg transition-transform transform hover:scale-105 hover:bg-gray-100 hover:shadow-xl">
               <h3 className="text-xl font-medium mb-2">Ứng dụng quản lý hiến máu</h3>
               <p className="text-gray-600">Một trang web vì cộng đồng người hiến máu sử dụng công nghệ NextJs, Nestjs.</p>
-              <a href="https://github.com/MeGaOne47/DonationBlood_Next13_Client_Main" className="text-blue-500 mt-4 inline-block">Xem trên GitHub FE</a>
+              <a href="https://github.com/MeGaOne47/DonationBlood_Next13_Client_Main" className="text-blue-900 mt-4 inline-block">Xem trên GitHub FE</a>
               <br />
-              <a href="https://github.com/MeGaOne47/nest-crud-app" className="text-blue-500 mt-4 inline-block">Xem trên GitHub BE</a>
+              <a href="https://github.com/MeGaOne47/nest-crud-app" className="text-blue-900 mt-4 inline-block">Xem trên GitHub BE</a>
             </div>
             <div className="bg-white p-6 rounded-lg shadow-lg transition-transform transform hover:scale-105 hover:bg-gray-100 hover:shadow-xl">
               <h3 className="text-xl font-medium mb-2">Ứng dụng quản lý bán hàng</h3>
               <p className="text-gray-600">Ứng dụng giúp người dùng bán và quản lý các mặt hàng sử dụng công nghệ PHP OOP.</p>
-              <a href="https://github.com/nguyentanhung/todolist" className="text-blue-500 mt-4 inline-block">Xem trên GitHub</a>
+              <a href="https://github.com/nguyentanhung/todolist" className="text-blue-900 mt-4 inline-block">Xem trên GitHub</a>
             </div>
           </div>
         </section>

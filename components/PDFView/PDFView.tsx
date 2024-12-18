@@ -1,11 +1,16 @@
 "use client";
 import React from "react";
 
-const PDFView = () => {
+interface PDFViewProps {
+  url: string;
+}
+
+const PDFView: React.FC<PDFViewProps> = ({ url }) => {
+  console.log("url", url);
   return (
     <div>
       <iframe
-        src="http://docs.google.com/gview?url=https://be-deploy.vercel.app/view/duthibaocao.pdf&embedded=true"
+        src={`http://docs.google.com/gview?url=${url}&embedded=true`}
         width="100%"
         height="800px"
       ></iframe>
@@ -14,3 +19,4 @@ const PDFView = () => {
 };
 
 export default PDFView;
+

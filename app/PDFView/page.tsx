@@ -1,16 +1,18 @@
-"use client"
-import dynamic from 'next/dynamic';
-const PDFView = dynamic(() => import('@/components/PDFView/PDFView'));
+"use client";
+import dynamic from "next/dynamic";
 
-const ContestReportPages = () => {
+const PDFView = dynamic(() => import('@/components/PDFView/PDFView'), { ssr: true });
 
-  return (
-    <div style={{ padding: '20px' }}>
-      {/* <h1 style={{textAlign: 'center'}}>Hung Nguyen</h1> */}
-      <PDFView/>
-    </div>
-  );
+const PDFViewPage = () => {
+    const url = window.location.href; // Lấy URL hiện tại
+    const file = new URL(url).searchParams.get('file'); // Lấy tham số query "file" từ URL
+
+    return (
+      <div style={{ padding: '20px' }}>
+        <PDFView url={`https://be-deploy.vercel.app/view/${file}`} />
+      </div>
+    );
 };
 
-export default ContestReportPages;
+export default PDFViewPage;
 

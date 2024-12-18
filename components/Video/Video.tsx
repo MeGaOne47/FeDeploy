@@ -21,13 +21,12 @@ const Video = () => {
       </div>
 
       {/* Video 3 */}
-      {/* <div className="flex flex-col justify-center items-center">
-        <h3 className="text-xl font-semibold mb-2">Tiêu đề video 3</h3>
+      <div className="flex flex-col justify-center items-center">
+        <h3 className="text-xl font-semibold mb-2">Video Thử Nghiệm 3</h3>
         <video className="w-full h-auto" controls loop muted>
-          <source src="/another-video.mp4" type="video/mp4" />
-          Video content here.
+          <source src="/6140808921635.mp4" type="video/mp4" />
         </video>
-      </div> */}
+      </div>
     </div>
   );
 };

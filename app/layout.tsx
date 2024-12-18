@@ -33,7 +33,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   const pathname = usePathname();
-  const authRoutes = ['/ContestReport', '/PDFView'];
+  const authRoutes = ['/ContestReport', '/PDFView', '/Video', 'ImagePage'];
   const isAuthRoute = authRoutes.some(route => pathname.includes(route));
   console.log("isAuthRoute", isAuthRoute); 
   return (

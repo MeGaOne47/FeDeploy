@@ -10,7 +10,7 @@ const PDFView: React.FC<PDFViewProps> = ({ url }) => {
   return (
     <div>
       <iframe
-        src={`http://docs.google.com/gview?url=${url}&embedded=true`}
+        src={`https://docs.google.com/gview?url=${url}&embedded=true`}
         width="100%"
         height="800px"
       ></iframe>

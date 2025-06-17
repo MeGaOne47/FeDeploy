@@ -1,38 +1,57 @@
 'use client';
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { FacebookOutlined, GithubOutlined, YoutubeOutlined } from '@ant-design/icons';
+import gsap from 'gsap';
 
 const FooterComponent: React.FC = () => {
+  const footerRef = useRef<HTMLElement | null>(null);
+
+  useEffect(() => {
+    gsap.fromTo(
+      footerRef.current,
+      { y: 50, opacity: 0 },
+      {
+        y: 0,
+        opacity: 1,
+        duration: 0.8,
+        ease: 'power2.out',
+      }
+    );
+  }, []);
+
   return (
     <footer
-      className="bg-orange-700 text-center py-5 relative bottom-0 left-0 w-full"
-      style={{ minHeight: '80px' }}
+      ref={footerRef}
+      className="py-6 w-full bg-gray-100 text-gray-800 dark:bg-slate-900 dark:text-white transition-colors duration-500"
     >
-      <div className="text-white mb-2">&copy; 2024 Nguyễn Tấn Hùng. All rights reserved.</div>
-      <div className="text-white flex justify-center items-center">
+      <div className="text-center text-sm sm:text-base mb-3">
+        &copy; 2024 <span className="font-semibold">Nguyễn Tấn Hùng</span>. All rights reserved.
+      </div>
+
+      <div className="flex justify-center space-x-6 text-xl">
         <a
           href="https://www.facebook.com/profile.php?id=100028399301933"
           target="_blank"
           rel="noopener noreferrer"
-          className="hover:text-blue-500 mx-2"
+          className="transition-transform transform hover:scale-110 hover:text-blue-500"
         >
-          <FacebookOutlined style={{ fontSize: '20px', width: '20px', height: '20px' }} />
+          <FacebookOutlined />
         </a>
         <a
           href="https://github.com/MeGaOne47"
           target="_blank"
           rel="noopener noreferrer"
-          className="hover:text-gray-500 mx-2"
+          className="transition-transform transform hover:scale-110 hover:text-black dark:hover:text-gray-300"
         >
-          <GithubOutlined style={{ fontSize: '20px', width: '20px', height: '20px' }} />
+          <GithubOutlined />
         </a>
         <a
           href="https://www.youtube.com/channel/UC2lPzjPXjeV2HoRPI2IJuiQ"
           target="_blank"
           rel="noopener noreferrer"
-          className="hover:text-red-500 mx-2"
+          className="transition-transform transform hover:scale-110 hover:text-red-500"
         >
-          <YoutubeOutlined style={{ fontSize: '20px', width: '20px', height: '20px' }} />
+          <YoutubeOutlined />
         </a>
       </div>
     </footer>

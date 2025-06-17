@@ -5,17 +5,17 @@ import { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Hung Nguyen",
-  description: "Hung Nguyen - VJC thực tập",
+  description: "Hung Nguyen",
   openGraph: {
     title: 'Hung Nguyen',
-    description: 'Hung Nguyen - VJC thực tập',
+    description: 'Hung Nguyen',
     type: 'website',
     images: [
       {
         url: 'https://be-deploy.vercel.app/view/car-1.jpg',
         width: 1200,
         height: 630,
-        alt: 'Hung Nguyen - Dự án deploy thực tập',
+        alt: 'Hung Nguyen - Dự án deploy',
       },
     ],
   },

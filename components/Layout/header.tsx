@@ -1,104 +1,119 @@
-"use client"
-import React, { useMemo, useState } from 'react';
-// import { MailOutlined, AppstoreOutlined, SettingOutlined } from '@ant-design/icons';
-// import Menu from 'antd/es/menu/menu';
+'use client';
 
-const HeaderComponent: React.FC = () => {
-  // const menuItems = useMemo(() => [
-  //   {
-  //     key: 'mail',
-  //     icon: <MailOutlined />,
-  //     label: 'Navigation One',
-  //   },
-  //   {
-  //     key: 'app',
-  //     icon: <AppstoreOutlined />,
-  //     label: 'Navigation Two',
-  //     disabled: true,
-  //   },
-  //   {
-  //     key: 'SubMenu',
-  //     icon: <SettingOutlined />,
-  //     label: 'Navigation Three - Submenu',
-  //     children: [
-  //       {
-  //         type: 'group',
-  //         label: 'Item 1',
-  //         children: [
-  //           { label: 'Option 1', key: 'setting:1' },
-  //           { label: 'Option 2', key: 'setting:2' },
-  //         ],
-  //       },
-  //       {
-  //         type: 'group',
-  //         label: 'Item 2',
-  //         children: [
-  //           { label: 'Option 3', key: 'setting:3' },
-  //           { label: 'Option 4', key: 'setting:4' },
-  //         ],
-  //       },
-  //     ],
-  //   },
-  //   {
-  //     key: 'alipay',
-  //     label: (
-  //       <a href="https://ant.design" target="_blank" rel="noopener noreferrer">
-  //         Navigation Four - Link
-  //       </a>
-  //     ),
-  //   },
-  // ], []);
+import { useEffect, useRef, useState } from 'react';
+import gsap from 'gsap';
+
+export default function HeaderComponent() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const headerRef = useRef<HTMLElement | null>(null);
+  const mobileMenuRef = useRef<HTMLUListElement | null>(null);
 
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
+  const toggleMenu = () => setIsMenuOpen((prev) => !prev);
+
+  useEffect(() => {
+    gsap.fromTo(
+      headerRef.current,
+      { y: -100, opacity: 0 },
+      {
+        y: 0,
+        opacity: 1,
+        duration: 0.7,
+        ease: 'power3.out',
+      }
+    );
+  }, []);
+
+  useEffect(() => {
+    if (isMenuOpen && mobileMenuRef.current) {
+      gsap.fromTo(
+        mobileMenuRef.current,
+        { opacity: 0, y: -10 },
+        { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out' }
+      );
+    }
+  }, [isMenuOpen]);
+
   return (
-    // <Menu mode="horizontal" items={menuItems} />
-    // <header className="bg-gray-800 text-white py-4 sticky top-0 z-50">
-    //   <nav className="max-w-7xl mx-auto flex justify-between items-center">
-    //     <div className="text-xl font-semibold">Nguyễn Tấn Hùng</div>
-    //     <ul className="flex space-x-6">
-    //       <li><a href="/" className="hover:text-gray-300">Trang chủ</a></li>
-    //       <li><a href="#GioiThieu" className="hover:text-gray-300">Giới thiệu</a></li>
-    //       <li><a href="#KyNang" className="hover:text-gray-300">Kỹ năng</a></li>
-    //       <li><a href="#KinhNghiem" className="hover:text-gray-300">Kinh nghiệm</a></li>
-    //       <li><a href="#DuAn" className="hover:text-gray-300">Dự án</a></li>
-    //     </ul>
-    //   </nav>
-    // </header>
-    <header className="bg-gray-800 text-white py-4 sticky top-0 z-50">
-      <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
-        <div className="text-lg sm:text-xl font-semibold">Nguyễn Tấn Hùng</div>
-        <ul className="hidden sm:flex space-x-4 md:space-x-6">
-          <li><a href="/" className="hover:text-gray-300">Trang chủ</a></li>
-          <li><a href="#GioiThieu" className="hover:text-gray-300">Giới thiệu</a></li>
-          <li><a href="#KyNang" className="hover:text-gray-300">Kỹ năng</a></li>
-          <li><a href="#KinhNghiem" className="hover:text-gray-300">Kinh nghiệm</a></li>
-          <li><a href="#DuAn" className="hover:text-gray-300">Dự án</a></li>
-          <li><a target="_blank" href="https://www.topcv.vn/xem-cv/VAECA1MAB1cFCQcCUQ9UXVcDAgQBAQYOWgNUBA825a" className="hover:text-gray-300">CV của tôi</a></li>
+    <header
+      ref={headerRef}
+      className="bg-slate-900/80 backdrop-blur-md shadow-md sticky top-0 z-50"
+    >
+      <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between">
+        {/* Logo */}
+        <div className="text-xl font-bold text-indigo-400 tracking-wide">
+          Nguyễn Tấn Hùng
+        </div>
+
+        {/* Menu Desktop */}
+        <ul className="hidden sm:flex items-center space-x-6 text-white font-medium">
+          <li>
+            <a href="/" className="hover:text-indigo-400 transition duration-200">Trang chủ</a>
+          </li>
+          <li>
+            <a href="#GioiThieu" className="hover:text-indigo-400 transition duration-200">Giới thiệu</a>
+          </li>
+          <li>
+            <a href="#KyNang" className="hover:text-indigo-400 transition duration-200">Kỹ năng</a>
+          </li>
+          <li>
+            <a href="#KinhNghiem" className="hover:text-indigo-400 transition duration-200">Kinh nghiệm</a>
+          </li>
+          <li>
+            <a href="#DuAn" className="hover:text-indigo-400 transition duration-200">Dự án</a>
+          </li>
+          <li>
+            <a
+              href="https://www.topcv.vn/xem-cv/VAECA1MAB1cFCQcCUQ9UXVcDAgQBAQYOWgNUBA825a"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-indigo-400 transition duration-200"
+            >
+              CV của tôi
+            </a>
+          </li>
         </ul>
+
+        {/* Button Mobile */}
         <div className="sm:hidden">
-          <button onClick={toggleMenu} aria-label="Mở menu" className="hover:text-gray-300">
-            <svg className="w-6 h-6" fill="#ffff" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="100" height="100" viewBox="0 0 50 50">
-              <path d="M 0 9 L 0 11 L 50 11 L 50 9 Z M 0 24 L 0 26 L 50 26 L 50 24 Z M 0 39 L 0 41 L 50 41 L 50 39 Z"></path>
+          <button
+            onClick={toggleMenu}
+            aria-label="Toggle menu"
+            className="text-white hover:text-indigo-400 transition"
+          >
+            <svg className="w-7 h-7" fill="currentColor" viewBox="0 0 20 20">
+              <path
+                fillRule="evenodd"
+                d="M3 5h14a1 1 0 010 2H3a1 1 0 010-2zm0 6h14a1 1 0 010 2H3a1 1 0 010-2zm0 6h14a1 1 0 010 2H3a1 1 0 010-2z"
+                clipRule="evenodd"
+              />
             </svg>
           </button>
         </div>
       </nav>
+
+      {/* Menu Mobile */}
       {isMenuOpen && (
-        <ul className="sm:hidden bg-gray-800 text-white flex flex-col items-center space-y-4 py-4">
-          <li><a href="/" className="hover:text-gray-300">Trang chủ</a></li>
-          <li><a href="#GioiThieu" className="hover:text-gray-300">Giới thiệu</a></li>
-          <li><a href="#KyNang" className="hover:text-gray-300">Kỹ năng</a></li>
-          <li><a href="#KinhNghiem" className="hover:text-gray-300">Kinh nghiệm</a></li>
-          <li><a href="#DuAn" className="hover:text-gray-300">Dự án</a></li>
-          <li><a target="_blank" href="https://www.topcv.vn/xem-cv/VAECA1MAB1cFCQcCUQ9UXVcDAgQBAQYOWgNUBA825a" className="hover:text-gray-300">CV của tôi</a></li>
+        <ul
+          ref={mobileMenuRef}
+          className="sm:hidden flex flex-col space-y-4 px-6 py-4 bg-slate-900 text-white font-medium border-t border-slate-700"
+        >
+          <li><a href="/" className="hover:text-indigo-400">Trang chủ</a></li>
+          <li><a href="#GioiThieu" className="hover:text-indigo-400">Giới thiệu</a></li>
+          <li><a href="#KyNang" className="hover:text-indigo-400">Kỹ năng</a></li>
+          <li><a href="#KinhNghiem" className="hover:text-indigo-400">Kinh nghiệm</a></li>
+          <li><a href="#DuAn" className="hover:text-indigo-400">Dự án</a></li>
+          <li>
+            <a
+              href="https://www.topcv.vn/xem-cv/VAECA1MAB1cFCQcCUQ9UXVcDAgQBAQYOWgNUBA825a"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-indigo-400"
+            >
+              CV của tôi
+            </a>
+          </li>
         </ul>
       )}
     </header>
-
   );
-};
-
-export default HeaderComponent;
+}

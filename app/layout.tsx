@@ -7,6 +7,7 @@ const FooterComponent = dynamic(() => import('@/components/Layout/footer'));
 import { Inter } from "next/font/google";
 import '@/app/globals.css';
 import { usePathname } from 'next/navigation';
+import { ThemeProvider } from 'next-themes';
 const inter = Inter({ subsets: ["latin"] });
 
 // export const metadata: Metadata = {
@@ -35,19 +36,21 @@ export default function RootLayout({
   const pathname = usePathname();
   const authRoutes = ['/ContestReport', '/PDFView', '/Video', 'ImagePage'];
   const isAuthRoute = authRoutes.some(route => pathname.includes(route));
-  console.log("isAuthRoute", isAuthRoute); 
+  console.log("isAuthRoute", isAuthRoute);
   return (
-    <html lang="vi" className="scroll-smooth">
+    <html lang="vi" className="scroll-smooth" suppressHydrationWarning>
       <meta name="google-site-verification" content="nmnsgjnJTG_EFzE9fyE8eVRXVSMix03TWrG4UqMj95E" />
       <link rel="icon" href="https://be-deploy.vercel.app/view/car-1.jpg" sizes="any" />
       <body>
         <div className={inter.className}>
-        {!isAuthRoute && <HeaderComponent/>}
-          {/* <HeaderComponent/> */}
+          <ThemeProvider attribute="class" enableSystem={true}>
+            {!isAuthRoute && <HeaderComponent />}
+            {/* <HeaderComponent/> */}
             {children}
             {/* <SpeedInsights/> */}
-          {/* <FooterComponent/> */}
-        {!isAuthRoute && <FooterComponent/>}
+            {/* <FooterComponent/> */}
+            {!isAuthRoute && <FooterComponent />}
+          </ThemeProvider>
         </div>
       </body>
     </html>

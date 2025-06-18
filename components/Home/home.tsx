@@ -48,7 +48,7 @@ export default function HomeIndex() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-900 to-slate-800 text-white relative overflow-hidden">
+    <div className="min-h-screen bg-white text-gray-900 dark:bg-gradient-to-b dark:from-slate-900 dark:to-slate-800 dark:text-white relative overflow-hidden transition-colors duration-500">
       <SnowEffect />
       <main className="max-w-7xl mx-auto p-6">
         {/* Avatar + Giới thiệu */}
@@ -79,47 +79,146 @@ export default function HomeIndex() {
 
         {/* Kỹ năng */}
         <section ref={skillsRef} id="KyNang" className="mt-10">
-          <h2 className="text-2xl font-semibold mb-4">Kỹ năng</h2>
-          <ul className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {["ReactJS", "Next.js", "JavaScript, TypeScript", "HTML, CSS, Tailwind CSS", "Lavarel", "PHP"].map((skill, idx) => (
-              <li key={idx} className="p-4 bg-slate-700 text-white rounded-lg shadow-md">
-                {skill}
-              </li>
-            ))}
-          </ul>
+          <h2 className="text-2xl font-semibold mb-6">Kỹ năng</h2>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+            {/* Ngôn ngữ lập trình */}
+            <fieldset className="border border-slate-600 rounded-lg p-4">
+              <legend className="text-lg font-semibold text-indigo-400 px-2">Ngôn ngữ lập trình</legend>
+              <ul className="grid grid-cols-2 gap-3 mt-2">
+                {['JavaScript', 'TypeScript', 'PHP'].map((skill, idx) => (
+                  <li key={idx} className="bg-slate-700 text-white px-3 py-2 rounded shadow-md text-sm text-center">
+                    {skill}
+                  </li>
+                ))}
+              </ul>
+            </fieldset>
+
+            {/* Frontend */}
+            <fieldset className="border border-slate-600 rounded-lg p-4">
+              <legend className="text-lg font-semibold text-indigo-400 px-2">Frontend</legend>
+              <ul className="grid grid-cols-2 gap-3 mt-2">
+                {['ReactJS', 'Next.js', 'Tailwind CSS', 'Ant Design', 'SCSS'].map((skill, idx) => (
+                  <li key={idx} className="bg-slate-700 text-white px-3 py-2 rounded shadow-md text-sm text-center">
+                    {skill}
+                  </li>
+                ))}
+              </ul>
+            </fieldset>
+
+            {/* Backend */}
+            <fieldset className="border border-slate-600 rounded-lg p-4">
+              <legend className="text-lg font-semibold text-indigo-400 px-2">Backend</legend>
+              <ul className="grid grid-cols-2 gap-3 mt-2">
+                {['Node.js', 'NestJS', 'Laravel (PHP)'].map((skill, idx) => (
+                  <li key={idx} className="bg-slate-700 text-white px-3 py-2 rounded shadow-md text-sm text-center">
+                    {skill}
+                  </li>
+                ))}
+              </ul>
+            </fieldset>
+
+            <fieldset className="border border-slate-600 rounded-lg p-4">
+              <legend className="text-lg font-semibold text-indigo-400 px-2">Cơ sở dữ liệu & Công cụ</legend>
+              <ul className="grid grid-cols-2 gap-3 mt-2">
+                {['MongoDB', 'MySQL', 'Git', 'Figma', 'Postman', 'Vercel'].map((skill, idx) => (
+                  <li key={idx} className="bg-slate-700 text-white px-3 py-2 rounded shadow-md text-sm text-center">
+                    {skill}
+                  </li>
+                ))}
+              </ul>
+            </fieldset>
+
+            <fieldset className="border border-slate-600 rounded-lg p-4">
+              <legend className="text-lg font-semibold text-indigo-400 px-2">Thư viện & Animation</legend>
+              <ul className="grid grid-cols-2 gap-3 mt-2">
+                {['GSAP', 'Frame-Motion'].map((skill, idx) => (
+                  <li key={idx} className="bg-slate-700 text-white px-3 py-2 rounded shadow-md text-sm text-center">
+                    {skill}
+                  </li>
+                ))}
+              </ul>
+            </fieldset>
+            <fieldset className="border border-slate-600 rounded-lg p-4">
+              <legend className="text-lg font-semibold text-indigo-400 px-2">State & Form Management</legend>
+              <ul className="grid grid-cols-2 gap-3 mt-2">
+                {['React Query', 'Zustand', 'Redux', 'React Hook Form', 'Custom Hooks'].map((skill, idx) => (
+                  <li key={idx} className="bg-slate-700 text-white px-3 py-2 rounded shadow-md text-sm text-center">
+                    {skill}
+                  </li>
+                ))}
+              </ul>
+            </fieldset>
+
+
+
+          </div>
         </section>
 
         {/* Kinh nghiệm */}
         <section ref={expRef} id="KinhNghiem" className="mt-10">
           <h2 className="text-2xl font-semibold mb-4">Kinh nghiệm làm việc</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[...Array(2)].map((_, idx) => (
-              <div key={idx} className="bg-slate-700 text-white p-6 rounded-lg shadow-lg transition-transform transform hover:scale-105 hover:bg-slate-600 hover:shadow-xl">
-                <h3 className="text-xl font-medium mb-2">{idx === 0 ? 'VIET JAPAN PARTNER CO., LTD' : 'Tham gia vào các dự án của CTY'}</h3>
-                <p className="text-slate-200 mb-2">{idx === 0 ? 'Thực tập sinh Web Developer' : 'Web Developer'}</p>
-                {idx === 0 && <p className="text-slate-200 mb-2">Thời gian: 04/2024 - 09/2024</p>}
-                <ul className="list-disc list-inside text-slate-200 text-sm leading-relaxed">
-                  {idx === 0 ? (
-                    <>
-                      <li>Phát triển các ứng dụng web bằng ReactJS và Next.js, Lavarel</li>
-                      <li>Sử dụng Ant Design, NextUI và Tailwind CSS để thiết kế giao diện người dùng</li>
-                      <li>Được học hỏi và sử dụng Lavarel(PHP)</li>
-                      <li>Được học hỏi và sử dụng AWS</li>
-                      <li>Làm việc với đội ngũ để tối ưu hiệu suất ứng dụng</li>
-                      <li>Tham gia vào các buổi họp và review code cùng đồng nghiệp</li>
-                    </>
-                  ) : (
-                    <>
-                      <li>Tham gia vào dự án vjp-connect sử dụng Next.js, Typescript, Laravel</li>
-                      <li>Tham gia dự án Horoscope (Japan) sử dụng Laravel (PHP)</li>
-                      <li>Tham gia CMS (Japan) dùng ReactJS (NextUI), Typescript</li>
-                    </>
-                  )}
-                </ul>
-              </div>
-            ))}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-8">
+
+            {/* SANTNS */}
+            <div className="bg-slate-700 text-white p-6 rounded-lg shadow-lg transition-transform transform hover:scale-105 hover:bg-slate-600 hover:shadow-xl">
+              <h3 className="text-xl font-medium mb-2">SANTNS - E-commerce Platform</h3>
+              <p className="text-slate-200 mb-2">Vị trí: Fullstack Developer | 11/2024 – 05/2025</p>
+              <p className="text-sm text-slate-200 mb-2">SANTNS là một nền tảng thương mại điện tử cho phép người dùng mua sắm nhiều loại sản phẩm thuộc các danh mục khác nhau như thời trang, điện tử, đồ gia dụng và nhiều hơn nữa.
+                Phần backend của hệ thống đã được xây dựng sẵn để xử lý logic nghiệp vụ và xử lý dữ liệu.</p>
+              <ul className="list-disc list-inside text-slate-200 text-sm leading-relaxed">
+                <li>Xây dựng giao diện người dùng responsive bằng Next.js</li>
+                <li>Tích hợp API để hiển thị dữ liệu sản phẩm theo thời gian thực</li>
+                <li>Sửa lỗi UI, tối ưu hiệu suất và trải nghiệm người dùng</li>
+                <li>Phối hợp với backend và thiết kế để đảm bảo tích hợp mượt mà</li>
+                <li>Stack: ReactJS, Next.js, Tailwind CSS, Ant Design, MongoDB, Node.js</li>
+              </ul>
+            </div>
+
+            {/* Gao Huu Co TNS */}
+            <div className="bg-slate-700 text-white p-6 rounded-lg shadow-lg transition-transform transform hover:scale-105 hover:bg-slate-600 hover:shadow-xl">
+              <h3 className="text-xl font-medium mb-2">Gạo Hữu Cơ TNS</h3>
+              <p className="text-slate-200 mb-2">Vị trí: Fullstack Developer | 10/2023 – 02/2024</p>
+              <p className="text-sm text-slate-200 mb-2">Trang web này được thiết kế để hiển thị các sản phẩm gạo hữu cơ và thông tin đại lý.
+                Người dùng có thể duyệt danh sách sản phẩm, tìm kiếm các loại gạo cụ thể và xem thông tin tổng quan về các đại lý.</p>
+              <ul className="list-disc list-inside text-slate-200 text-sm leading-relaxed">
+                <li>Phát triển trang web giới thiệu sản phẩm gạo và đại lý</li>
+                <li>Xây dựng chức năng tìm kiếm gạo và hiển thị chi tiết sản phẩm</li>
+                <li>Thiết kế và dựng UI đại lý và sản phẩm tối ưu mọi thiết bị</li>
+                <li>Stack: ReactJS, Next.js, Tailwind CSS, Ant Design, Node.js, MongoDB</li>
+              </ul>
+            </div>
+
+            {/* Viet Japan Connect */}
+            <div className="bg-slate-700 text-white p-6 rounded-lg shadow-lg transition-transform transform hover:scale-105 hover:bg-slate-600 hover:shadow-xl">
+              <h3 className="text-xl font-medium mb-2">Sekatsuku</h3>
+              <p className="text-slate-200 mb-2">Vị trí: Front-End Developer | 06/2024 – 09/2024</p>
+              <p className="text-sm text-slate-200 mb-2">Trang web này kết nối các đối tác từ Việt Nam và Nhật Bản.
+                Trang web sẽ cập nhật thông tin về các công ty Việt Nam và Nhật Bản thuộc nhiều lĩnh vực khác nhau để kết nối và hợp tác kinh doanh.</p>
+              <ul className="list-disc list-inside text-slate-200 text-sm leading-relaxed">
+                <li>Thiết kế giao diện quản lý cuộc gọi và danh sách cuộc gọi</li>
+                <li>Map API lịch sử cuộc gọi, lời nhắc và phân quyền người dùng</li>
+                <li>Stack: ReactJS, Next.js, TailwindCSS, NextUI, MySQL</li>
+              </ul>
+            </div>
+
+            {/* Sekatsuku */}
+            <div className="bg-slate-700 text-white p-6 rounded-lg shadow-lg transition-transform transform hover:scale-105 hover:bg-slate-600 hover:shadow-xl">
+              <h3 className="text-xl font-medium mb-2">Viet Japan Connect</h3>
+              <p className="text-slate-200 mb-2">Vị trí: Fullstack Developer | 03/2024 – 06/2024</p>
+              <p className="text-sm text-slate-200 mb-2">Trang web này đại diện cho hệ thống telesale, nơi người dùng có thể thực hiện và quản lý số lượng lớn danh sách cuộc gọi.
+                Hệ thống tổ chức các nhóm quản lý cuộc gọi và người dùng dịch vụ để kiểm soát toàn bộ thông tin liên quan đến cuộc gọi.</p>
+              <ul className="list-disc list-inside text-slate-200 text-sm leading-relaxed">
+                <li>Thiết kế UI bài viết và map API kết nối với doanh nghiệp</li>
+                <li>Tự động hóa chuyển ngôn ngữ (đa ngôn ngữ) cho form nhập</li>
+                <li>Stack: ReactJS, Next.js, SCSS, Ant Design, Node.js, MySQL</li>
+              </ul>
+            </div>
+
           </div>
         </section>
+
 
         {/* Dự án học tập */}
         <section ref={projectRef} id="DuAn" className="mt-10">
@@ -129,25 +228,25 @@ export default function HomeIndex() {
               {
                 title: 'Ứng dụng quản lý hiến máu',
                 desc: 'Một trang web vì cộng đồng người hiến máu sử dụng công nghệ NextJs, Nestjs.',
-                linkFE: 'https://github.com/MeGaOne47/DonationBlood_Next13_Client_Main',
-                linkBE: 'https://github.com/MeGaOne47/nest-crud-app',
+                // linkFE: 'https://github.com/MeGaOne47/DonationBlood_Next13_Client_Main',
+                // linkBE: 'https://github.com/MeGaOne47/nest-crud-app',
               },
               {
                 title: 'Ứng dụng quản lý bán hàng',
                 desc: 'Ứng dụng giúp người dùng bán và quản lý các mặt hàng sử dụng công nghệ PHP OOP.',
-                linkFE: 'https://github.com/nguyentanhung/todolist',
+                // linkFE: 'https://github.com/nguyentanhung/todolist',
               },
             ].map((project, idx) => (
               <div key={idx} className="bg-slate-700 text-white p-6 rounded-lg shadow-lg transition-transform transform hover:scale-105 hover:bg-slate-600 hover:shadow-xl">
                 <h3 className="text-xl font-medium mb-2">{project.title}</h3>
                 <p className="text-slate-200">{project.desc}</p>
-                <a href={project.linkFE} className="text-blue-300 mt-4 inline-block" target="_blank">Xem trên GitHub FE</a>
+                {/* <a href={project.linkFE} className="text-blue-300 mt-4 inline-block" target="_blank">Xem trên GitHub FE</a>
                 {project.linkBE && (
                   <>
                     <br />
                     <a href={project.linkBE} className="text-blue-300 mt-2 inline-block" target="_blank">Xem trên GitHub BE</a>
                   </>
-                )}
+                )} */}
               </div>
             ))}
           </div>

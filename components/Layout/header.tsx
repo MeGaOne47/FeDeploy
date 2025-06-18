@@ -2,11 +2,15 @@
 
 import { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
+import { useTheme } from 'next-themes';
+import { MoonIcon, SunIcon } from '@heroicons/react/24/outline';
 
 export default function HeaderComponent() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const headerRef = useRef<HTMLElement | null>(null);
   const mobileMenuRef = useRef<HTMLUListElement | null>(null);
+
+  const { theme, setTheme } = useTheme();
 
   const toggleMenu = () => setIsMenuOpen((prev) => !prev);
 
@@ -46,35 +50,50 @@ export default function HeaderComponent() {
 
         {/* Menu Desktop */}
         <ul className="hidden sm:flex items-center space-x-6 text-white font-medium">
-          <li>
-            <a href="/" className="hover:text-indigo-400 transition duration-200">Trang chủ</a>
-          </li>
-          <li>
-            <a href="#GioiThieu" className="hover:text-indigo-400 transition duration-200">Giới thiệu</a>
-          </li>
-          <li>
-            <a href="#KyNang" className="hover:text-indigo-400 transition duration-200">Kỹ năng</a>
-          </li>
-          <li>
-            <a href="#KinhNghiem" className="hover:text-indigo-400 transition duration-200">Kinh nghiệm</a>
-          </li>
-          <li>
-            <a href="#DuAn" className="hover:text-indigo-400 transition duration-200">Dự án</a>
-          </li>
+          <li><a href="/" className="hover:text-indigo-400">Trang chủ</a></li>
+          <li><a href="#GioiThieu" className="hover:text-indigo-400">Giới thiệu</a></li>
+          <li><a href="#KyNang" className="hover:text-indigo-400">Kỹ năng</a></li>
+          <li><a href="#KinhNghiem" className="hover:text-indigo-400">Kinh nghiệm</a></li>
+          <li><a href="#DuAn" className="hover:text-indigo-400">Dự án</a></li>
           <li>
             <a
               href="https://www.topcv.vn/xem-cv/VAECA1MAB1cFCQcCUQ9UXVcDAgQBAQYOWgNUBA825a"
               target="_blank"
               rel="noopener noreferrer"
-              className="hover:text-indigo-400 transition duration-200"
+              className="hover:text-indigo-400"
             >
               CV của tôi
             </a>
           </li>
+          {/* Nút Toggle Dark/Light */}
+          <li>
+            <button
+              onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+              className="ml-4 hover:text-yellow-400 transition"
+              aria-label="Toggle Dark Mode"
+            >
+              {theme === 'dark' ? (
+                <SunIcon className="w-5 h-5" />
+              ) : (
+                <MoonIcon className="w-5 h-5" />
+              )}
+            </button>
+          </li>
         </ul>
 
         {/* Button Mobile */}
-        <div className="sm:hidden">
+        <div className="sm:hidden flex items-center gap-4">
+          <button
+            onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+            className="text-white hover:text-yellow-400 transition"
+            aria-label="Toggle Dark Mode"
+          >
+            {theme === 'dark' ? (
+              <SunIcon className="w-6 h-6" />
+            ) : (
+              <MoonIcon className="w-6 h-6" />
+            )}
+          </button>
           <button
             onClick={toggleMenu}
             aria-label="Toggle menu"

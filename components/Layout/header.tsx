@@ -57,7 +57,7 @@ export default function HeaderComponent() {
           <li><a href="#DuAn" className="hover:text-indigo-400">Dự án</a></li>
           <li>
             <a
-              href="https://www.topcv.vn/xem-cv/VAECA1MAB1cFCQcCUQ9UXVcDAgQBAQYOWgNUBA825a"
+              href="https://www.canva.com/design/DAGmiEMp1W8/ab-VXI9aGjuQrwkV1gaMrQ/view?utm_content=DAGmiEMp1W8&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h0683a3ec83#1"
               target="_blank"
               rel="noopener noreferrer"
               className="hover:text-indigo-400"
@@ -123,7 +123,7 @@ export default function HeaderComponent() {
           <li><a href="#DuAn" className="hover:text-indigo-400">Dự án</a></li>
           <li>
             <a
-              href="https://www.topcv.vn/xem-cv/VAECA1MAB1cFCQcCUQ9UXVcDAgQBAQYOWgNUBA825a"
+              href="https://www.canva.com/design/DAGmiEMp1W8/ab-VXI9aGjuQrwkV1gaMrQ/view?utm_content=DAGmiEMp1W8&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h0683a3ec83#1"
               target="_blank"
               rel="noopener noreferrer"
               className="hover:text-indigo-400"

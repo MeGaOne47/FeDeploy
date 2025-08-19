@@ -36,7 +36,7 @@ export default function RootLayout({
   const pathname = usePathname();
   const authRoutes = ['/ContestReport', '/PDFView', '/Video', 'ImagePage'];
   const isAuthRoute = authRoutes.some(route => pathname.includes(route));
-  console.log("isAuthRoute", isAuthRoute);
+  // console.log("isAuthRoute", isAuthRoute);
   return (
     <html lang="vi" className="scroll-smooth" suppressHydrationWarning>
       <meta name="google-site-verification" content="nmnsgjnJTG_EFzE9fyE8eVRXVSMix03TWrG4UqMj95E" />

@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Image from 'next/image';
@@ -10,10 +10,42 @@ import SnowEffect from '../SnowEffect/SnowEffect';
 gsap.registerPlugin(ScrollTrigger);
 
 export default function HomeIndex() {
+  const [showIntro, setShowIntro] = useState(true);
   const avatarRef = useRef(null);
   const skillsRef = useRef(null);
   const expRef = useRef(null);
   const projectRef = useRef(null);
+  const introRef = useRef<HTMLDivElement | null>(null);
+  const textRef = useRef<HTMLHeadingElement | null>(null);
+
+  useEffect(() => {
+    if (introRef.current && textRef.current) {
+      const letters = textRef.current.querySelectorAll("span");
+
+      const tl = gsap.timeline();
+
+      // Ẩn toàn bộ chữ ban đầu
+      gsap.set(letters, { opacity: 0, y: 50 });
+
+      // Sau 0.5s mới bắt đầu hiện từng chữ
+      tl.to(letters, {
+        opacity: 1,
+        y: 0,
+        stagger: 0.05, // thời gian trễ giữa mỗi chữ
+        duration: 0.6,
+        ease: "power3.out",
+        delay: 0.5,
+      });
+
+      // Sau 3 giây fade out intro
+      tl.to(introRef.current, {
+        opacity: 0,
+        duration: 1,
+        delay: 1,
+        onComplete: () => setShowIntro(false),
+      });
+    }
+  }, []);
 
   useEffect(() => {
     const animateSection = (ref: React.RefObject<HTMLElement>, delay = 0) => {
@@ -253,6 +285,24 @@ export default function HomeIndex() {
         </section>
 
       </main>
+
+      {showIntro && (
+        <div
+          ref={introRef}
+          className="fixed inset-0 flex items-center justify-center bg-gradient-to-r from-purple-900 via-black to-indigo-900 text-white z-50"
+        >
+          <h1
+            ref={textRef}
+            className="text-5xl font-extrabold tracking-wide flex gap-1"
+          >
+            {"Welcome To My Portfolio".split("").map((char, i) => (
+              <span key={i} className="inline-block">
+                {char}
+              </span>
+            ))}
+          </h1>
+        </div>
+      )}
     </div>
   );
 }

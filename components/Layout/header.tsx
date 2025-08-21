@@ -69,7 +69,7 @@ export default function HeaderComponent() {
           <li>
             <button
               onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-              className="ml-4 hover:text-yellow-400 transition"
+              className="ml-4 mt-1 hover:text-yellow-400 transition"
               aria-label="Toggle Dark Mode"
             >
               {theme === 'dark' ? (

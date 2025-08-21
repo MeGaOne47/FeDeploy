@@ -54,7 +54,7 @@ export default function HeaderComponent() {
           <li><a href="#GioiThieu" className="hover:text-indigo-400">Giới thiệu</a></li>
           <li><a href="#KyNang" className="hover:text-indigo-400">Kỹ năng</a></li>
           <li><a href="#KinhNghiem" className="hover:text-indigo-400">Kinh nghiệm</a></li>
-          <li><a href="#DuAn" className="hover:text-indigo-400">Dự án</a></li>
+          {/* <li><a href="#DuAn" className="hover:text-indigo-400">Dự án</a></li> */}
           <li>
             <a
               href="https://www.canva.com/design/DAGmiEMp1W8/ab-VXI9aGjuQrwkV1gaMrQ/view?utm_content=DAGmiEMp1W8&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h0683a3ec83#1"
@@ -120,7 +120,7 @@ export default function HeaderComponent() {
           <li><a href="#GioiThieu" className="hover:text-indigo-400">Giới thiệu</a></li>
           <li><a href="#KyNang" className="hover:text-indigo-400">Kỹ năng</a></li>
           <li><a href="#KinhNghiem" className="hover:text-indigo-400">Kinh nghiệm</a></li>
-          <li><a href="#DuAn" className="hover:text-indigo-400">Dự án</a></li>
+          {/* <li><a href="#DuAn" className="hover:text-indigo-400">Dự án</a></li> */}
           <li>
             <a
               href="https://www.canva.com/design/DAGmiEMp1W8/ab-VXI9aGjuQrwkV1gaMrQ/view?utm_content=DAGmiEMp1W8&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h0683a3ec83#1"

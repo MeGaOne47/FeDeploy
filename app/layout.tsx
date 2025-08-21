@@ -40,7 +40,7 @@ export default function RootLayout({
   return (
     <html lang="vi" className="scroll-smooth" suppressHydrationWarning>
       <meta name="google-site-verification" content="nmnsgjnJTG_EFzE9fyE8eVRXVSMix03TWrG4UqMj95E" />
-      <link rel="icon" href="https://be-deploy.vercel.app/view/car-1.jpg" sizes="any" />
+      <link rel="icon" href="https://c4.wallpaperflare.com/wallpaper/193/556/883/car-neon-chevrolet-corvette-race-cars-hd-wallpaper-preview.jpg" sizes="any" />
       <body>
         <div className={inter.className}>
           <ThemeProvider attribute="class" enableSystem={true}>

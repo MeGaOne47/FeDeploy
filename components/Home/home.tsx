@@ -89,7 +89,8 @@ export default function HomeIndex() {
           className="flex items-center justify-center mt-10 space-x-6"
         >
           <Image
-            src="https://be-deploy.vercel.app/view/bqUDplfbEyqCOCwLOdJV_65df3162143f9_cvtpl.jpg"
+            // src="https://be-deploy.vercel.app/view/bqUDplfbEyqCOCwLOdJV_65df3162143f9_cvtpl.jpg"
+            src="/avatar_trang_1_cd729c335b.jpg"
             alt="Avatar của Nguyễn Tấn Hùng"
             className="w-32 h-32 rounded-full shadow-lg"
             width={500}
@@ -253,51 +254,51 @@ export default function HomeIndex() {
 
 
         {/* Dự án học tập */}
-        <section ref={projectRef} id="DuAn" className="mt-10">
+        {/* <section ref={projectRef} id="DuAn" className="mt-10">
           <h2 className="text-2xl font-semibold mb-4">Dự án học tập</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
               {
                 title: 'Ứng dụng quản lý hiến máu',
                 desc: 'Một trang web vì cộng đồng người hiến máu sử dụng công nghệ NextJs, Nestjs.',
-                // linkFE: 'https://github.com/MeGaOne47/DonationBlood_Next13_Client_Main',
-                // linkBE: 'https://github.com/MeGaOne47/nest-crud-app',
+                linkFE: 'https://github.com/MeGaOne47/DonationBlood_Next13_Client_Main',
+                linkBE: 'https://github.com/MeGaOne47/nest-crud-app',
               },
               {
                 title: 'Ứng dụng quản lý bán hàng',
                 desc: 'Ứng dụng giúp người dùng bán và quản lý các mặt hàng sử dụng công nghệ PHP OOP.',
-                // linkFE: 'https://github.com/nguyentanhung/todolist',
+                linkFE: 'https://github.com/nguyentanhung/todolist',
               },
             ].map((project, idx) => (
               <div key={idx} className="bg-slate-700 text-white p-6 rounded-lg shadow-lg transition-transform transform hover:scale-105 hover:bg-slate-600 hover:shadow-xl">
                 <h3 className="text-xl font-medium mb-2">{project.title}</h3>
                 <p className="text-slate-200">{project.desc}</p>
-                {/* <a href={project.linkFE} className="text-blue-300 mt-4 inline-block" target="_blank">Xem trên GitHub FE</a>
+                <a href={project.linkFE} className="text-blue-300 mt-4 inline-block" target="_blank">Xem trên GitHub FE</a>
                 {project.linkBE && (
                   <>
                     <br />
                     <a href={project.linkBE} className="text-blue-300 mt-2 inline-block" target="_blank">Xem trên GitHub BE</a>
                   </>
-                )} */}
+                )}
               </div>
             ))}
           </div>
-        </section>
+        </section> */}
 
       </main>
 
       {showIntro && (
         <div
           ref={introRef}
-          className="fixed inset-0 flex items-center justify-center bg-gradient-to-r from-purple-900 via-black to-indigo-900 text-white z-50"
+          className="fixed inset-0 flex items-center justify-center px-4 text-center bg-gradient-to-r from-purple-900 via-black to-indigo-900 text-white z-50"
         >
           <h1
             ref={textRef}
-            className="text-5xl font-extrabold tracking-wide flex gap-1"
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-widest flex flex-wrap justify-center gap-y-2"
           >
             {"Welcome To My Portfolio".split("").map((char, i) => (
               <span key={i} className="inline-block">
-                {char}
+                {char === " " ? "\u00A0" : char}
               </span>
             ))}
           </h1>

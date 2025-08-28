@@ -8,6 +8,7 @@ import { Inter } from "next/font/google";
 import '@/app/globals.css';
 import { usePathname } from 'next/navigation';
 import { ThemeProvider } from 'next-themes';
+import ScrollToTopButton from '@/components/ScrollToTopButton/scrollToTopButton';
 const inter = Inter({ subsets: ["latin"] });
 
 // export const metadata: Metadata = {
@@ -49,6 +50,7 @@ export default function RootLayout({
             {children}
             {/* <SpeedInsights/> */}
             {/* <FooterComponent/> */}
+            <ScrollToTopButton />
             {!isAuthRoute && <FooterComponent />}
           </ThemeProvider>
         </div>

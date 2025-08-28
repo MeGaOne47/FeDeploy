@@ -45,14 +45,14 @@ const FooterComponent: React.FC = () => {
         >
           <GithubOutlined />
         </a>
-        <a
+        {/* <a
           href="https://www.youtube.com/channel/UC2lPzjPXjeV2HoRPI2IJuiQ"
           target="_blank"
           rel="noopener noreferrer"
           className="transition-transform transform hover:scale-110 hover:text-red-500"
         >
           <YoutubeOutlined />
-        </a>
+        </a> */}
       </div>
     </footer>
   );

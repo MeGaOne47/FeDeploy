@@ -50,21 +50,21 @@ export default function HeaderComponent() {
 
         {/* Menu Desktop */}
         <ul className="hidden sm:flex items-center space-x-6 text-white font-medium">
-          <li><a href="/" className="hover:text-indigo-400">Trang chủ</a></li>
-          <li><a href="#GioiThieu" className="hover:text-indigo-400">Giới thiệu</a></li>
-          <li><a href="#KyNang" className="hover:text-indigo-400">Kỹ năng</a></li>
-          <li><a href="#KinhNghiem" className="hover:text-indigo-400">Kinh nghiệm</a></li>
+          <li><a href="/" className="hover:text-indigo-400">Home</a></li>
+          <li><a href="#GioiThieu" className="hover:text-indigo-400">About</a></li>
+          <li><a href="#KyNang" className="hover:text-indigo-400">Skills</a></li>
+          <li><a href="#KinhNghiem" className="hover:text-indigo-400">Experience</a></li>
           {/* <li><a href="#DuAn" className="hover:text-indigo-400">Dự án</a></li> */}
-          <li>
+          {/* <li>
             <a
               href="https://www.canva.com/design/DAGmiEMp1W8/ab-VXI9aGjuQrwkV1gaMrQ/view?utm_content=DAGmiEMp1W8&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h0683a3ec83#1"
               target="_blank"
               rel="noopener noreferrer"
               className="hover:text-indigo-400"
             >
-              CV của tôi
+              My CV
             </a>
-          </li>
+          </li> */}
           {/* Nút Toggle Dark/Light */}
           <li>
             <button

@@ -6,6 +6,8 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Image from 'next/image';
 import About from '../About/about';
 import SnowEffect from '../SnowEffect/SnowEffect';
+import Link from 'next/link';
+import { Button } from 'antd';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -99,10 +101,10 @@ export default function HomeIndex() {
           />
           <div className="text-left">
             <h1 className="text-4xl font-bold mb-2">
-              Chào mừng đến với Portfolio của tôi!
+              Welcome to my Portfolio!
             </h1>
             <p className="text-xl">
-              Tôi là Nguyễn Tấn Hùng, một lập trình viên Web Developer.
+              I am Nguyễn Tấn Hùng, a Web Developer.
             </p>
           </div>
         </section>
@@ -112,13 +114,13 @@ export default function HomeIndex() {
 
         {/* Kỹ năng */}
         <section ref={skillsRef} id="KyNang" className="mt-10">
-          <h2 className="text-2xl font-semibold mb-6">Kỹ năng</h2>
+          <h2 className="text-2xl font-semibold mb-6">Skills</h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 
             {/* Ngôn ngữ lập trình */}
             <fieldset className="border border-slate-600 rounded-lg p-4">
-              <legend className="text-lg font-semibold text-indigo-400 px-2">Ngôn ngữ lập trình</legend>
+              <legend className="text-lg font-semibold text-indigo-400 px-2">Programming language</legend>
               <ul className="grid grid-cols-2 gap-3 mt-2">
                 {['JavaScript', 'TypeScript', 'PHP'].map((skill, idx) => (
                   <li key={idx} className="bg-slate-700 text-white px-3 py-2 rounded shadow-md text-sm text-center">
@@ -130,7 +132,7 @@ export default function HomeIndex() {
 
             {/* Frontend */}
             <fieldset className="border border-slate-600 rounded-lg p-4">
-              <legend className="text-lg font-semibold text-indigo-400 px-2">Frontend</legend>
+              <legend className="text-lg font-semibold text-indigo-400 px-2">Front end</legend>
               <ul className="grid grid-cols-2 gap-3 mt-2">
                 {['ReactJS', 'Next.js', 'Tailwind CSS', 'Ant Design', 'SCSS'].map((skill, idx) => (
                   <li key={idx} className="bg-slate-700 text-white px-3 py-2 rounded shadow-md text-sm text-center">
@@ -142,7 +144,7 @@ export default function HomeIndex() {
 
             {/* Backend */}
             <fieldset className="border border-slate-600 rounded-lg p-4">
-              <legend className="text-lg font-semibold text-indigo-400 px-2">Backend</legend>
+              <legend className="text-lg font-semibold text-indigo-400 px-2">Back end</legend>
               <ul className="grid grid-cols-2 gap-3 mt-2">
                 {['Node.js', 'NestJS', 'Laravel (PHP)'].map((skill, idx) => (
                   <li key={idx} className="bg-slate-700 text-white px-3 py-2 rounded shadow-md text-sm text-center">
@@ -200,13 +202,16 @@ export default function HomeIndex() {
               <p className="text-slate-200 mb-2">Vị trí: Fullstack Developer | 11/2024 – 05/2025</p>
               <p className="text-sm text-slate-200 mb-2">SANTNS là một nền tảng thương mại điện tử cho phép người dùng mua sắm nhiều loại sản phẩm thuộc các danh mục khác nhau như thời trang, điện tử, đồ gia dụng và nhiều hơn nữa.
                 Phần backend của hệ thống đã được xây dựng sẵn để xử lý logic nghiệp vụ và xử lý dữ liệu.</p>
-              <ul className="list-disc list-inside text-slate-200 text-sm leading-relaxed">
+              <ul className="mb-5 list-disc list-inside text-slate-200 text-sm leading-relaxed">
                 <li>Xây dựng giao diện người dùng responsive bằng Next.js</li>
                 <li>Tích hợp API để hiển thị dữ liệu sản phẩm theo thời gian thực</li>
                 <li>Sửa lỗi UI, tối ưu hiệu suất và trải nghiệm người dùng</li>
                 <li>Phối hợp với backend và thiết kế để đảm bảo tích hợp mượt mà</li>
                 <li>Stack: ReactJS, Next.js, Tailwind CSS, Ant Design, MongoDB, Node.js</li>
               </ul>
+              <Button className='fixed bottom-0 mb-1' type="primary">
+                <Link target='_blank' href={`https://santns.com/vi`} className="mb-2">Link tới web</Link>
+              </Button>
             </div>
 
             {/* Gao Huu Co TNS */}
@@ -215,38 +220,47 @@ export default function HomeIndex() {
               <p className="text-slate-200 mb-2">Vị trí: Fullstack Developer | 10/2023 – 02/2024</p>
               <p className="text-sm text-slate-200 mb-2">Trang web này được thiết kế để hiển thị các sản phẩm gạo hữu cơ và thông tin đại lý.
                 Người dùng có thể duyệt danh sách sản phẩm, tìm kiếm các loại gạo cụ thể và xem thông tin tổng quan về các đại lý.</p>
-              <ul className="list-disc list-inside text-slate-200 text-sm leading-relaxed">
+              <ul className="mb-5 list-disc list-inside text-slate-200 text-sm leading-relaxed">
                 <li>Phát triển trang web giới thiệu sản phẩm gạo và đại lý</li>
                 <li>Xây dựng chức năng tìm kiếm gạo và hiển thị chi tiết sản phẩm</li>
                 <li>Thiết kế và dựng UI đại lý và sản phẩm tối ưu mọi thiết bị</li>
                 <li>Stack: ReactJS, Next.js, Tailwind CSS, Ant Design, Node.js, MongoDB</li>
               </ul>
+              <Button className='fixed bottom-0 mb-1' type="primary">
+                <Link target='_blank' href={`https://gaohuucotaynam.com/vi`} className="mb-2">Link tới web</Link>
+              </Button>
             </div>
 
-            {/* Viet Japan Connect */}
+            {/* Sekatsuku */}
             <div className="bg-slate-700 text-white p-6 rounded-lg shadow-lg transition-transform transform hover:scale-105 hover:bg-slate-600 hover:shadow-xl">
               <h3 className="text-xl font-medium mb-2">Sekatsuku</h3>
               <p className="text-slate-200 mb-2">Vị trí: Front-End Developer | 06/2024 – 09/2024</p>
               <p className="text-sm text-slate-200 mb-2">Trang web này kết nối các đối tác từ Việt Nam và Nhật Bản.
                 Trang web sẽ cập nhật thông tin về các công ty Việt Nam và Nhật Bản thuộc nhiều lĩnh vực khác nhau để kết nối và hợp tác kinh doanh.</p>
-              <ul className="list-disc list-inside text-slate-200 text-sm leading-relaxed">
+              <ul className="mb-5 list-disc list-inside text-slate-200 text-sm leading-relaxed">
                 <li>Thiết kế giao diện quản lý cuộc gọi và danh sách cuộc gọi</li>
                 <li>Map API lịch sử cuộc gọi, lời nhắc và phân quyền người dùng</li>
                 <li>Stack: ReactJS, Next.js, TailwindCSS, NextUI, MySQL</li>
               </ul>
+              {/* <Button className='fixed bottom-0 mb-1' type="primary">
+                <Link target='_blank' href={`https://vj-digital.com/`} className="mb-2">Link tới web</Link>
+              </Button> */}
             </div>
 
-            {/* Sekatsuku */}
+            {/* Viet Japan Connect */}
             <div className="bg-slate-700 text-white p-6 rounded-lg shadow-lg transition-transform transform hover:scale-105 hover:bg-slate-600 hover:shadow-xl">
               <h3 className="text-xl font-medium mb-2">Viet Japan Connect</h3>
               <p className="text-slate-200 mb-2">Vị trí: Fullstack Developer | 03/2024 – 06/2024</p>
               <p className="text-sm text-slate-200 mb-2">Trang web này đại diện cho hệ thống telesale, nơi người dùng có thể thực hiện và quản lý số lượng lớn danh sách cuộc gọi.
                 Hệ thống tổ chức các nhóm quản lý cuộc gọi và người dùng dịch vụ để kiểm soát toàn bộ thông tin liên quan đến cuộc gọi.</p>
-              <ul className="list-disc list-inside text-slate-200 text-sm leading-relaxed">
+              <ul className="mb-5 list-disc list-inside text-slate-200 text-sm leading-relaxed">
                 <li>Thiết kế UI bài viết và map API kết nối với doanh nghiệp</li>
                 <li>Tự động hóa chuyển ngôn ngữ (đa ngôn ngữ) cho form nhập</li>
                 <li>Stack: ReactJS, Next.js, SCSS, Ant Design, Node.js, MySQL</li>
               </ul>
+              <Button className='fixed bottom-0 mb-1' type="primary">
+                <Link target='_blank' href={`https://vj-digital.com`} className="mb-2">Link tới web</Link>
+              </Button>
             </div>
 
           </div>

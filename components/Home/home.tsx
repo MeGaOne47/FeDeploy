@@ -155,7 +155,7 @@ export default function HomeIndex() {
             </fieldset>
 
             <fieldset className="border border-slate-600 rounded-lg p-4">
-              <legend className="text-lg font-semibold text-indigo-400 px-2">Cơ sở dữ liệu & Công cụ</legend>
+              <legend className="text-lg font-semibold text-indigo-400 px-2">Database & Tools</legend>
               <ul className="grid grid-cols-2 gap-3 mt-2">
                 {['MongoDB', 'MySQL', 'Git', 'Figma', 'Postman', 'Vercel'].map((skill, idx) => (
                   <li key={idx} className="bg-slate-700 text-white px-3 py-2 rounded shadow-md text-sm text-center">
@@ -166,7 +166,7 @@ export default function HomeIndex() {
             </fieldset>
 
             <fieldset className="border border-slate-600 rounded-lg p-4">
-              <legend className="text-lg font-semibold text-indigo-400 px-2">Thư viện & Animation</legend>
+              <legend className="text-lg font-semibold text-indigo-400 px-2">Library & Animation</legend>
               <ul className="grid grid-cols-2 gap-3 mt-2">
                 {['GSAP', 'Frame-Motion'].map((skill, idx) => (
                   <li key={idx} className="bg-slate-700 text-white px-3 py-2 rounded shadow-md text-sm text-center">
@@ -193,73 +193,99 @@ export default function HomeIndex() {
 
         {/* Kinh nghiệm */}
         <section ref={expRef} id="KinhNghiem" className="mt-10">
-          <h2 className="text-2xl font-semibold mb-4">Kinh nghiệm làm việc</h2>
+          <h2 className="text-2xl font-semibold mb-4">Work Experience</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-8">
 
             {/* SANTNS */}
             <div className="bg-slate-700 text-white p-6 rounded-lg shadow-lg transition-transform transform hover:scale-105 hover:bg-slate-600 hover:shadow-xl">
               <h3 className="text-xl font-medium mb-2">SANTNS - E-commerce Platform</h3>
-              <p className="text-slate-200 mb-2">Vị trí: Fullstack Developer | 11/2024 – 05/2025</p>
-              <p className="text-sm text-slate-200 mb-2">SANTNS là một nền tảng thương mại điện tử cho phép người dùng mua sắm nhiều loại sản phẩm thuộc các danh mục khác nhau như thời trang, điện tử, đồ gia dụng và nhiều hơn nữa.
-                Phần backend của hệ thống đã được xây dựng sẵn để xử lý logic nghiệp vụ và xử lý dữ liệu.</p>
-              <ul className="mb-5 list-disc list-inside text-slate-200 text-sm leading-relaxed">
+              <p className="text-slate-200 mb-2">Position: Front-End Developer | 11/2024 – 05/2025</p>
+              {/* <p className="text-sm text-slate-200 mb-2">SANTNS là một nền tảng thương mại điện tử cho phép người dùng mua sắm nhiều loại sản phẩm thuộc các danh mục khác nhau như thời trang, điện tử, đồ gia dụng và nhiều hơn nữa.
+                Phần backend của hệ thống đã được xây dựng sẵn để xử lý logic nghiệp vụ và xử lý dữ liệu.</p> */}
+              <p className="text-sm text-slate-200 mb-2">SANTNS is an e-commerce platform that allows users to shop for a wide range of products across various categories such as fashion, electronics, home appliances, and more.
+                The backend of the system has already been developed to handle business logic and data processing.</p>
+              {/* <ul className="mb-5 list-disc list-inside text-slate-200 text-sm leading-relaxed">
                 <li>Xây dựng giao diện người dùng responsive bằng Next.js</li>
                 <li>Tích hợp API để hiển thị dữ liệu sản phẩm theo thời gian thực</li>
                 <li>Sửa lỗi UI, tối ưu hiệu suất và trải nghiệm người dùng</li>
                 <li>Phối hợp với backend và thiết kế để đảm bảo tích hợp mượt mà</li>
+                <li>Stack: Next.js, Tailwind CSS, Ant Design, MongoDB, Node.js</li>
+              </ul> */}
+              <ul className="mb-5 list-disc list-inside text-slate-200 text-sm leading-relaxed">
+                <li>Developed a responsive user interface using Next.js</li>
+                <li>Integrated APIs to display real-time product data</li>
+                <li>Fixed UI bugs, optimized performance, and enhanced user experience</li>
+                <li>Collaborated with backend and design teams to ensure seamless integration</li>
                 <li>Stack: ReactJS, Next.js, Tailwind CSS, Ant Design, MongoDB, Node.js</li>
               </ul>
               <Button className='fixed bottom-0 mb-1' type="primary">
-                <Link target='_blank' href={`https://santns.com/vi`} className="mb-2">Link tới web</Link>
+                <Link target='_blank' href={`https://santns.com/vi`} className="mb-2">Link Web</Link>
               </Button>
             </div>
 
             {/* Gao Huu Co TNS */}
             <div className="bg-slate-700 text-white p-6 rounded-lg shadow-lg transition-transform transform hover:scale-105 hover:bg-slate-600 hover:shadow-xl">
               <h3 className="text-xl font-medium mb-2">Gạo Hữu Cơ TNS</h3>
-              <p className="text-slate-200 mb-2">Vị trí: Fullstack Developer | 10/2023 – 02/2024</p>
-              <p className="text-sm text-slate-200 mb-2">Trang web này được thiết kế để hiển thị các sản phẩm gạo hữu cơ và thông tin đại lý.
-                Người dùng có thể duyệt danh sách sản phẩm, tìm kiếm các loại gạo cụ thể và xem thông tin tổng quan về các đại lý.</p>
+              <p className="text-slate-200 mb-2">Position: Front-End Developer | 10/2023 – 02/2024</p>
+              {/* <p className="text-sm text-slate-200 mb-2">Trang web này được thiết kế để hiển thị các sản phẩm gạo hữu cơ và thông tin đại lý.
+                Người dùng có thể duyệt danh sách sản phẩm, tìm kiếm các loại gạo cụ thể và xem thông tin tổng quan về các đại lý.</p> */}
+              <p className="text-sm text-slate-200 mb-2">
+                This website is designed to showcase organic rice products and dealer information.
+                Users can browse the product catalog, search for specific rice types, and view an overview of dealers.
+              </p>
               <ul className="mb-5 list-disc list-inside text-slate-200 text-sm leading-relaxed">
-                <li>Phát triển trang web giới thiệu sản phẩm gạo và đại lý</li>
-                <li>Xây dựng chức năng tìm kiếm gạo và hiển thị chi tiết sản phẩm</li>
-                <li>Thiết kế và dựng UI đại lý và sản phẩm tối ưu mọi thiết bị</li>
+                <li>Developed a website to showcase rice products and dealers</li>
+                <li>Built search functionality and product detail display</li>
+                <li>Designed and implemented responsive UI for products and dealers</li>
                 <li>Stack: ReactJS, Next.js, Tailwind CSS, Ant Design, Node.js, MongoDB</li>
               </ul>
               <Button className='fixed bottom-0 mb-1' type="primary">
-                <Link target='_blank' href={`https://gaohuucotaynam.com/vi`} className="mb-2">Link tới web</Link>
+                <Link target='_blank' href={`https://gaohuucotaynam.com/vi`} className="mb-2">Link Web</Link>
               </Button>
             </div>
 
             {/* Sekatsuku */}
             <div className="bg-slate-700 text-white p-6 rounded-lg shadow-lg transition-transform transform hover:scale-105 hover:bg-slate-600 hover:shadow-xl">
               <h3 className="text-xl font-medium mb-2">Sekatsuku</h3>
-              <p className="text-slate-200 mb-2">Vị trí: Front-End Developer | 06/2024 – 09/2024</p>
-              <p className="text-sm text-slate-200 mb-2">Trang web này kết nối các đối tác từ Việt Nam và Nhật Bản.
-                Trang web sẽ cập nhật thông tin về các công ty Việt Nam và Nhật Bản thuộc nhiều lĩnh vực khác nhau để kết nối và hợp tác kinh doanh.</p>
-              <ul className="mb-5 list-disc list-inside text-slate-200 text-sm leading-relaxed">
+              <p className="text-slate-200 mb-2">Position: Front-End Developer | 06/2024 – 09/2024</p>
+              {/* <p className="text-sm text-slate-200 mb-2">Trang web này kết nối các đối tác từ Việt Nam và Nhật Bản.
+                Trang web sẽ cập nhật thông tin về các công ty Việt Nam và Nhật Bản thuộc nhiều lĩnh vực khác nhau để kết nối và hợp tác kinh doanh.</p> */}
+              <p className="text-sm text-slate-200 mb-2">
+                This website connects partners from Vietnam and Japan.
+                It provides updated information about Vietnamese and Japanese companies across various industries to foster networking and business collaboration.
+              </p>
+              {/* <ul className="mb-5 list-disc list-inside text-slate-200 text-sm leading-relaxed">
                 <li>Thiết kế giao diện quản lý cuộc gọi và danh sách cuộc gọi</li>
                 <li>Map API lịch sử cuộc gọi, lời nhắc và phân quyền người dùng</li>
                 <li>Stack: ReactJS, Next.js, TailwindCSS, NextUI, MySQL</li>
+              </ul> */}
+              <ul className="mb-5 list-disc list-inside text-slate-200 text-sm leading-relaxed">
+                <li>Designed the UI for call management and call list</li>
+                <li>Integrated APIs for call history, reminders, and user role management</li>
+                <li>Stack: ReactJS, Next.js, TailwindCSS, NextUI, MySQL</li>
               </ul>
               {/* <Button className='fixed bottom-0 mb-1' type="primary">
-                <Link target='_blank' href={`https://vj-digital.com/`} className="mb-2">Link tới web</Link>
+                <Link target='_blank' href={`https://vj-digital.com/`} className="mb-2">Link Web</Link>
               </Button> */}
             </div>
 
             {/* Viet Japan Connect */}
             <div className="bg-slate-700 text-white p-6 rounded-lg shadow-lg transition-transform transform hover:scale-105 hover:bg-slate-600 hover:shadow-xl">
               <h3 className="text-xl font-medium mb-2">Viet Japan Connect</h3>
-              <p className="text-slate-200 mb-2">Vị trí: Fullstack Developer | 03/2024 – 06/2024</p>
-              <p className="text-sm text-slate-200 mb-2">Trang web này đại diện cho hệ thống telesale, nơi người dùng có thể thực hiện và quản lý số lượng lớn danh sách cuộc gọi.
-                Hệ thống tổ chức các nhóm quản lý cuộc gọi và người dùng dịch vụ để kiểm soát toàn bộ thông tin liên quan đến cuộc gọi.</p>
+              <p className="text-slate-200 mb-2">Position: Front-End Developer | 03/2024 – 06/2024</p>
+              {/* <p className="text-sm text-slate-200 mb-2">Trang web này đại diện cho hệ thống telesale, nơi người dùng có thể thực hiện và quản lý số lượng lớn danh sách cuộc gọi.
+                Hệ thống tổ chức các nhóm quản lý cuộc gọi và người dùng dịch vụ để kiểm soát toàn bộ thông tin liên quan đến cuộc gọi.</p> */}
+              <p className="text-sm text-slate-200 mb-2">
+                This website represents a telesales system where users can perform and manage large call lists.
+                The system organizes call management groups and service users to maintain full control over all call-related information.
+              </p>
               <ul className="mb-5 list-disc list-inside text-slate-200 text-sm leading-relaxed">
-                <li>Thiết kế UI bài viết và map API kết nối với doanh nghiệp</li>
-                <li>Tự động hóa chuyển ngôn ngữ (đa ngôn ngữ) cho form nhập</li>
+                <li>Designed article UI and integrated APIs to connect with businesses</li>
+                <li>Implemented automated multilingual support for input forms</li>
                 <li>Stack: ReactJS, Next.js, SCSS, Ant Design, Node.js, MySQL</li>
               </ul>
               <Button className='fixed bottom-0 mb-1' type="primary">
-                <Link target='_blank' href={`https://vj-digital.com`} className="mb-2">Link tới web</Link>
+                <Link target='_blank' href={`https://vjp-connect.com/vi`} className="mb-2">Link Web</Link>
               </Button>
             </div>
 

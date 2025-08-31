@@ -5,7 +5,12 @@ const nextConfig = {
     styledComponents: true,
   },
   images: {
-    domains: ['be-deploy.vercel.app'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'be-deploy.vercel.app',
+      },
+    ],
   },
 };
 

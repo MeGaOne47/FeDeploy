@@ -72,10 +72,10 @@ export default function HeaderComponent() {
               className="ml-4 mt-1 hover:text-yellow-400 transition"
               aria-label="Toggle Dark Mode"
             >
-              {theme === 'dark' ? (
-                <SunIcon className="w-5 h-5" />
-              ) : (
+              {theme === 'light' ? (
                 <MoonIcon className="w-5 h-5" />
+              ) : (
+                <SunIcon className="w-5 h-5" />
               )}
             </button>
           </li>
@@ -88,10 +88,10 @@ export default function HeaderComponent() {
             className="text-white hover:text-yellow-400 transition"
             aria-label="Toggle Dark Mode"
           >
-            {theme === 'dark' ? (
-              <SunIcon className="w-6 h-6" />
+            {theme === 'light' ? (
+              <MoonIcon className="w-5 h-5" />
             ) : (
-              <MoonIcon className="w-6 h-6" />
+              <SunIcon className="w-5 h-5" />
             )}
           </button>
           <button

@@ -1,16 +1,9 @@
-"use client"
-import dynamic from 'next/dynamic';
-const Select_File_Upload = dynamic(() => import('@/components/Upload/Select_File_Upload'));
+import SelectFileUpload from "@/components/Upload/Select_File_Upload";
 
-const UploadPage = () => {
-
+export default function UploadPage() {
   return (
-    <div style={{ padding: '20px' }}>
-      <h1 style={{textAlign: 'center'}}>Hung Nguyen</h1>
-      <Select_File_Upload/>
+    <div className="px-4 py-8 sm:px-6 lg:px-8">
+      <SelectFileUpload />
     </div>
   );
-};
-
-export default UploadPage;
-
+}

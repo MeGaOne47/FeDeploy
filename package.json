@@ -8,12 +8,6 @@
     "start": "next start",
     "lint": "next lint"
   },
-  "proxy": {
-    "/": {
-      "target": "https://be-deploy-eight.vercel.app",
-      "changeOrigin": true
-    }
-  },
   "dependencies": {
     "@heroicons/react": "^2.2.0",
     "@vercel/analytics": "^1.2.2",

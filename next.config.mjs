@@ -1,8 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    reactStrictMode: true,
-  compiler: {
-    styledComponents: true,
+  reactStrictMode: true,
+  experimental: {
+    optimizePackageImports: ['antd', '@heroicons/react', 'lucide-react'],
   },
   images: {
     remotePatterns: [

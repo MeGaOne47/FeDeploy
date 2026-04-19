@@ -1,137 +1,116 @@
-'use client';
+"use client";
 
-import { useEffect, useRef, useState } from 'react';
-import gsap from 'gsap';
-import { useTheme } from 'next-themes';
-import { MoonIcon, SunIcon } from '@heroicons/react/24/outline';
+import { useEffect, useState } from "react";
+import Link from "next/link";
+import { MoonIcon, SunIcon } from "@heroicons/react/24/outline";
+import { Menu, X } from "lucide-react";
+import { usePathname } from "next/navigation";
+import { useTheme } from "next-themes";
+import { NAV_ITEMS, SITE_NAME } from "@/app/site-config";
 
 export default function HeaderComponent() {
+  const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const headerRef = useRef<HTMLElement | null>(null);
-  const mobileMenuRef = useRef<HTMLUListElement | null>(null);
-
-  const { theme, setTheme } = useTheme();
-
-  const toggleMenu = () => setIsMenuOpen((prev) => !prev);
+  const [mounted, setMounted] = useState(false);
+  const { resolvedTheme, setTheme } = useTheme();
 
   useEffect(() => {
-    gsap.fromTo(
-      headerRef.current,
-      { y: -100, opacity: 0 },
-      {
-        y: 0,
-        opacity: 1,
-        duration: 0.7,
-        ease: 'power3.out',
-      }
-    );
+    setMounted(true);
   }, []);
 
   useEffect(() => {
-    if (isMenuOpen && mobileMenuRef.current) {
-      gsap.fromTo(
-        mobileMenuRef.current,
-        { opacity: 0, y: -10 },
-        { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out' }
-      );
-    }
-  }, [isMenuOpen]);
+    setIsMenuOpen(false);
+  }, [pathname]);
+
+  const isDark = resolvedTheme === "dark";
 
   return (
-    <header
-      ref={headerRef}
-      className="bg-slate-900/80 backdrop-blur-md shadow-md sticky top-0 z-50"
-    >
-      <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between">
-        {/* Logo */}
-        <div className="text-xl font-bold text-indigo-400 tracking-wide">
-          Nguyễn Tấn Hùng
-        </div>
+    <header className="sticky top-0 z-50 border-b border-slate-200/70 bg-white/85 backdrop-blur-xl transition-colors dark:border-slate-800/70 dark:bg-slate-950/80">
+      <nav className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
+        <Link
+          href="/"
+          className="text-lg font-semibold tracking-[0.2em] text-slate-900 transition hover:text-sky-600 dark:text-white dark:hover:text-sky-300"
+        >
+          {SITE_NAME}
+        </Link>
 
-        {/* Menu Desktop */}
-        <ul className="hidden sm:flex items-center space-x-6 text-white font-medium">
-          <li><a href="/" className="hover:text-indigo-400">Home</a></li>
-          <li><a href="#GioiThieu" className="hover:text-indigo-400">About</a></li>
-          <li><a href="#KyNang" className="hover:text-indigo-400">Skills</a></li>
-          <li><a href="#KinhNghiem" className="hover:text-indigo-400">Experience</a></li>
-          {/* <li><a href="#DuAn" className="hover:text-indigo-400">Dự án</a></li> */}
-          {/* <li>
-            <a
-              href="https://www.canva.com/design/DAGmiEMp1W8/ab-VXI9aGjuQrwkV1gaMrQ/view?utm_content=DAGmiEMp1W8&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h0683a3ec83#1"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-indigo-400"
-            >
-              My CV
-            </a>
-          </li> */}
-          {/* Nút Toggle Dark/Light */}
-          <li>
-            <button
-              onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-              className="ml-4 mt-1 hover:text-yellow-400 transition"
-              aria-label="Toggle Dark Mode"
-            >
-              {theme === 'light' ? (
-                <MoonIcon className="w-5 h-5" />
-              ) : (
-                <SunIcon className="w-5 h-5" />
-              )}
-            </button>
-          </li>
-        </ul>
+        <div className="hidden items-center gap-8 sm:flex">
+          <ul className="flex items-center gap-6 text-sm font-medium text-slate-600 dark:text-slate-200">
+            {NAV_ITEMS.map((item) => (
+              <li key={item.href}>
+                <Link
+                  href={item.href}
+                  className="transition hover:text-sky-600 dark:hover:text-sky-300"
+                >
+                  {item.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
 
-        {/* Button Mobile */}
-        <div className="sm:hidden flex items-center gap-4">
           <button
-            onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-            className="text-white hover:text-yellow-400 transition"
-            aria-label="Toggle Dark Mode"
+            type="button"
+            onClick={() => setTheme(isDark ? "light" : "dark")}
+            className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 text-slate-700 transition hover:border-sky-400 hover:text-sky-600 dark:border-slate-700 dark:text-slate-100 dark:hover:border-sky-300 dark:hover:text-sky-300"
+            aria-label="Toggle color theme"
           >
-            {theme === 'light' ? (
-              <MoonIcon className="w-5 h-5" />
+            {mounted ? (
+              isDark ? (
+                <SunIcon className="h-5 w-5" />
+              ) : (
+                <MoonIcon className="h-5 w-5" />
+              )
             ) : (
-              <SunIcon className="w-5 h-5" />
+              <span className="h-5 w-5" />
             )}
           </button>
+        </div>
+
+        <div className="flex items-center gap-2 sm:hidden">
           <button
-            onClick={toggleMenu}
-            aria-label="Toggle menu"
-            className="text-white hover:text-indigo-400 transition"
+            type="button"
+            onClick={() => setTheme(isDark ? "light" : "dark")}
+            className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 text-slate-700 transition hover:border-sky-400 hover:text-sky-600 dark:border-slate-700 dark:text-slate-100 dark:hover:border-sky-300 dark:hover:text-sky-300"
+            aria-label="Toggle color theme"
           >
-            <svg className="w-7 h-7" fill="currentColor" viewBox="0 0 20 20">
-              <path
-                fillRule="evenodd"
-                d="M3 5h14a1 1 0 010 2H3a1 1 0 010-2zm0 6h14a1 1 0 010 2H3a1 1 0 010-2zm0 6h14a1 1 0 010 2H3a1 1 0 010-2z"
-                clipRule="evenodd"
-              />
-            </svg>
+            {mounted ? (
+              isDark ? (
+                <SunIcon className="h-5 w-5" />
+              ) : (
+                <MoonIcon className="h-5 w-5" />
+              )
+            ) : (
+              <span className="h-5 w-5" />
+            )}
+          </button>
+
+          <button
+            type="button"
+            onClick={() => setIsMenuOpen((prev) => !prev)}
+            aria-expanded={isMenuOpen}
+            aria-label="Toggle menu"
+            className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 text-slate-700 transition hover:border-sky-400 hover:text-sky-600 dark:border-slate-700 dark:text-slate-100 dark:hover:border-sky-300 dark:hover:text-sky-300"
+          >
+            {isMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </button>
         </div>
       </nav>
 
-      {/* Menu Mobile */}
       {isMenuOpen && (
-        <ul
-          ref={mobileMenuRef}
-          className="sm:hidden flex flex-col space-y-4 px-6 py-4 bg-slate-900 text-white font-medium border-t border-slate-700"
-        >
-          <li><a href="/" className="hover:text-indigo-400">Trang chủ</a></li>
-          <li><a href="#GioiThieu" className="hover:text-indigo-400">Giới thiệu</a></li>
-          <li><a href="#KyNang" className="hover:text-indigo-400">Kỹ năng</a></li>
-          <li><a href="#KinhNghiem" className="hover:text-indigo-400">Kinh nghiệm</a></li>
-          {/* <li><a href="#DuAn" className="hover:text-indigo-400">Dự án</a></li> */}
-          <li>
-            <a
-              href="https://www.canva.com/design/DAGmiEMp1W8/ab-VXI9aGjuQrwkV1gaMrQ/view?utm_content=DAGmiEMp1W8&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h0683a3ec83#1"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-indigo-400"
-            >
-              CV của tôi
-            </a>
-          </li>
-        </ul>
+        <div className="border-t border-slate-200/70 bg-white px-4 py-4 dark:border-slate-800/70 dark:bg-slate-950 sm:hidden">
+          <ul className="flex flex-col gap-3 text-sm font-medium text-slate-700 dark:text-slate-100">
+            {NAV_ITEMS.map((item) => (
+              <li key={item.href}>
+                <Link
+                  href={item.href}
+                  className="block rounded-2xl px-3 py-2 transition hover:bg-slate-100 hover:text-sky-600 dark:hover:bg-slate-900 dark:hover:text-sky-300"
+                >
+                  {item.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
       )}
     </header>
   );

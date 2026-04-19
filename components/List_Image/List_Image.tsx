@@ -1,118 +1,130 @@
 'use client';
+
 import { useEffect, useState } from 'react';
-import axios from 'axios';
-import { SERVER_DOMAIN } from '../../app/constants';
 import Link from 'next/link';
-import message from 'antd/es/message';
-import List from 'antd/es/list';
 import Button from 'antd/es/button';
-import { Modal } from 'antd';
+import List from 'antd/es/list';
+import Modal from 'antd/es/modal';
+import Spin from 'antd/es/spin';
+import message from 'antd/es/message';
+import { buildServerAssetUrl, SERVER_DOMAIN } from '@/app/site-config';
 
-function List_Image() {
-    const [files, setFiles] = useState([]);
+export default function ListImage() {
+  const [files, setFiles] = useState<string[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [deletingFile, setDeletingFile] = useState<string | null>(null);
 
-    useEffect(() => {
-        fetchFiles();
-    }, []);
+  useEffect(() => {
+    void fetchFiles();
+  }, []);
 
-    const fetchFiles = async () => {
+  async function fetchFiles() {
+    setIsLoading(true);
+
+    try {
+      const response = await fetch(`${SERVER_DOMAIN}/list`, {
+        cache: 'no-store',
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to fetch files');
+      }
+
+      const data = (await response.json()) as string[];
+      setFiles(data);
+    } catch (error) {
+      message.error('Khong the lay danh sach file');
+    } finally {
+      setIsLoading(false);
+    }
+  }
+
+  function handleDelete(filename: string) {
+    Modal.confirm({
+      title: 'Ban co chac chan muon xoa file nay khong?',
+      content: 'Hanh dong nay khong the hoan tac.',
+      okText: 'Xoa',
+      cancelText: 'Huy',
+      onOk: async () => {
         try {
-            const response = await axios.get(`${SERVER_DOMAIN}/list`);
-            setFiles(response.data);
-        } catch (error) {
-            message.error('Failed to fetch files');
-        }
-    };
+          setDeletingFile(filename);
 
-    const handleDelete = async (filename: any) => {
-        Modal.confirm({
-            title: 'Bạn có chắc chắn muốn xóa file này không?',
-            content: 'Hành động này không thể hoàn tác',
-            okText: 'Xóa',
-            cancelText: 'Hủy',
-            onOk: async () => {
-                try {
-                    await axios.delete(`${SERVER_DOMAIN}/delete/${filename}`);
-                    message.success('File đã xóa thành công');
-                    fetchFiles();
-                } catch (error) {
-                    message.error('Không thể xóa file');
-                }
+          const response = await fetch(
+            `${SERVER_DOMAIN}/delete/${encodeURIComponent(filename)}`,
+            {
+              method: 'DELETE',
             },
-        });
-    };
+          );
 
-    return (
-        <>
-            <div
-                style={{
-                    width: '100%',
-                    marginBottom: '10px',
-                }}
-            >
-                <div
-                    style={{
-                        width: '100%',
-                        textAlign: 'center',
-                        marginBottom: '10px',
-                    }}
+          if (!response.ok) {
+            throw new Error('Delete failed');
+          }
+
+          message.success('Da xoa file thanh cong');
+          await fetchFiles();
+        } catch (error) {
+          message.error('Khong the xoa file');
+        } finally {
+          setDeletingFile(null);
+        }
+      },
+    });
+  }
+
+  return (
+    <section className="mx-auto max-w-4xl rounded-[2rem] border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-950">
+      <div className="mb-6 flex flex-col items-center justify-between gap-4 text-center sm:flex-row sm:text-left">
+        <div>
+          <p className="text-sm font-semibold uppercase tracking-[0.25em] text-sky-600 dark:text-sky-300">
+            Upload Manager
+          </p>
+          <h1 className="mt-2 text-2xl font-bold text-slate-950 dark:text-white">
+            File List
+          </h1>
+        </div>
+
+        <Button type="primary">
+          <Link href="/UploadPage">Upload image</Link>
+        </Button>
+      </div>
+
+      {isLoading ? (
+        <div className="flex min-h-48 items-center justify-center">
+          <Spin size="large" tip="Dang tai danh sach file..." />
+        </div>
+      ) : (
+        <List
+          bordered
+          locale={{ emptyText: 'Chua co file nao.' }}
+          dataSource={files}
+          renderItem={(item) => (
+            <List.Item className="flex flex-col gap-4 !px-4 !py-4 sm:flex-row sm:items-center sm:justify-between">
+              <div className="min-w-0 flex-1">
+                <a
+                  href={buildServerAssetUrl(`/download/${encodeURIComponent(item)}`)}
+                  className="break-all text-sm font-medium text-slate-700 transition hover:text-sky-600 dark:text-slate-200 dark:hover:text-sky-300"
                 >
-                    <h2>File List</h2>
-                    <Button style={{ marginBottom: '10px' }} type="dashed">
-                        <Link href="/UploadPage" color='red'>
-                            Upload Image
-                        </Link>
-                    </Button>
-                </div>
-                <List
-                    style={{
-                        width: '80%', // Tăng kích thước khung chứa
-                        margin: 'auto',
-                        border: '1px solid #ccc',
-                    }}
-                    bordered
-                    dataSource={files}
-                    renderItem={(item) => (
-                        <List.Item
-                            style={{
-                                display: 'flex',
-                                justifyContent: 'space-between', // Giãn cách đều giữa tên file và nút
-                                alignItems: 'center',
-                            }}
-                        >
-                            <List.Item.Meta
-                                title={
-                                    <a 
-                                        href={`${SERVER_DOMAIN}/download/${item}`} 
-                                        style={{ wordWrap: 'break-word', overflowWrap: 'break-word' }}
-                                    >
-                                        {item}
-                                    </a>
-                                }
-                            />
-                            <div
-                                style={{
-                                    display: 'flex',
-                                    gap: '10px', // Tạo khoảng cách giữa các nút
-                                }}
-                            >
-                                <Button
-                                    type="dashed"
-                                    danger
-                                    onClick={() => handleDelete(item)}
-                                >
-                                    Delete
-                                </Button>
-                                <Button type="primary">
-                                    <a href={`${SERVER_DOMAIN}/view/${item}`} style={{ color: '#fff' }}>View</a>
-                                </Button>
-                            </div>
-                        </List.Item>
-                    )}
-                />
-            </div>
-        </>
-    );
-}
+                  {item}
+                </a>
+              </div>
 
-export default List_Image;
+              <div className="flex flex-wrap gap-2">
+                <Button
+                  danger
+                  type="default"
+                  loading={deletingFile === item}
+                  onClick={() => handleDelete(item)}
+                >
+                  Delete
+                </Button>
+                <Button type="primary" href={buildServerAssetUrl(`/view/${encodeURIComponent(item)}`)}>
+                  View
+                </Button>
+              </div>
+            </List.Item>
+          )}
+        />
+      )}
+    </section>
+  );
+}

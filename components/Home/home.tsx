@@ -1,344 +1,286 @@
 'use client';
 
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Image from 'next/image';
+import Link from 'next/link';
 import About from '../About/about';
 import SnowEffect from '../SnowEffect/SnowEffect';
-import Link from 'next/link';
-import { Button } from 'antd';
+import {
+  EXPERIENCES,
+  SITE_NAME,
+  SITE_ROLE,
+  SKILL_GROUPS,
+} from '@/app/site-config';
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function HomeIndex() {
   const [showIntro, setShowIntro] = useState(true);
-  const avatarRef = useRef(null);
-  const skillsRef = useRef(null);
-  const expRef = useRef(null);
-  const projectRef = useRef(null);
+  const rootRef = useRef<HTMLDivElement | null>(null);
   const introRef = useRef<HTMLDivElement | null>(null);
   const textRef = useRef<HTMLHeadingElement | null>(null);
+  const sectionRefs = useRef<HTMLElement[]>([]);
 
   useEffect(() => {
-    if (introRef.current && textRef.current) {
-      const letters = textRef.current.querySelectorAll("span");
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      setShowIntro(false);
+      return;
+    }
 
-      const tl = gsap.timeline();
+    const root = rootRef.current;
+    const intro = introRef.current;
+    const text = textRef.current;
 
-      // Ẩn toàn bộ chữ ban đầu
-      gsap.set(letters, { opacity: 0, y: 50 });
+    if (!root || !intro || !text) {
+      setShowIntro(false);
+      return;
+    }
 
-      // Sau 0.5s mới bắt đầu hiện từng chữ
-      tl.to(letters, {
-        opacity: 1,
-        y: 0,
-        stagger: 0.05, // thời gian trễ giữa mỗi chữ
-        duration: 0.6,
-        ease: "power3.out",
-        delay: 0.5,
-      });
-
-      // Sau 3 giây fade out intro
-      tl.to(introRef.current, {
-        opacity: 0,
-        duration: 1,
-        delay: 1,
+    const context = gsap.context(() => {
+      const letters = text.querySelectorAll('span');
+      const timeline = gsap.timeline({
         onComplete: () => setShowIntro(false),
       });
-    }
-  }, []);
 
-  useEffect(() => {
-    const animateSection = (ref: React.RefObject<HTMLElement>, delay = 0) => {
-      if (ref.current) {
+      gsap.set(letters, { opacity: 0, y: 24 });
+
+      timeline
+        .to(letters, {
+          opacity: 1,
+          y: 0,
+          stagger: 0.04,
+          duration: 0.5,
+          ease: 'power3.out',
+          delay: 0.3,
+        })
+        .to(intro, {
+          opacity: 0,
+          duration: 0.8,
+          delay: 0.8,
+        });
+
+      sectionRefs.current.forEach((section, index) => {
         gsap.fromTo(
-          ref.current,
-          {
-            opacity: 0,
-            y: 50,
-          },
+          section,
+          { opacity: 0, y: 48 },
           {
             opacity: 1,
             y: 0,
-            duration: 1,
-            delay,
+            duration: 0.8,
+            delay: index * 0.05,
             ease: 'power2.out',
             scrollTrigger: {
-              trigger: ref.current,
-              start: 'top 80%', // khi phần tử bắt đầu hiện ra khoảng 80% từ dưới lên
-              toggleActions: 'play reverse play reverse',
-              once: false,
+              trigger: section,
+              start: 'top 82%',
+              once: true,
             },
-          }
+          },
         );
-      }
-    };
+      });
+    }, root);
 
-    animateSection(avatarRef);
-    animateSection(skillsRef, 0.1);
-    animateSection(expRef, 0.2);
-    animateSection(projectRef, 0.3);
+    return () => {
+      context.revert();
+    };
   }, []);
 
   return (
-    <div className="min-h-screen bg-white text-gray-900 dark:bg-gradient-to-b dark:from-slate-900 dark:to-slate-800 dark:text-white relative overflow-hidden transition-colors duration-500">
+    <div
+      ref={rootRef}
+      className="relative min-h-screen overflow-hidden bg-slate-50 text-slate-900 transition-colors duration-500 dark:bg-[radial-gradient(circle_at_top,_#1e293b,_#020617_55%)] dark:text-white"
+    >
       <SnowEffect />
-      <main className="max-w-7xl mx-auto p-6">
-        {/* Avatar + Giới thiệu */}
+
+      <main className="relative z-10 mx-auto flex max-w-7xl flex-col gap-20 px-6 py-10 sm:px-8 lg:px-10 lg:py-16">
         <section
-          ref={avatarRef}
-          className="flex items-center justify-center mt-10 space-x-6"
+          ref={(node) => {
+            if (node) {
+              sectionRefs.current[0] = node;
+            }
+          }}
+          className="grid gap-10 rounded-[2rem] border border-white/60 bg-white/80 p-8 shadow-xl shadow-slate-200/60 backdrop-blur-xl dark:border-slate-800/80 dark:bg-slate-900/70 dark:shadow-slate-950/30 lg:grid-cols-[auto,1fr]"
         >
-          <Image
-            // src="https://be-deploy.vercel.app/view/bqUDplfbEyqCOCwLOdJV_65df3162143f9_cvtpl.jpg"
-            src="/avatar_trang_1_cd729c335b.jpg"
-            alt="Avatar của Nguyễn Tấn Hùng"
-            className="w-32 h-32 rounded-full shadow-lg"
-            width={500}
-            height={300}
-            priority
-          />
-          <div className="text-left">
-            <h1 className="text-4xl font-bold mb-2">
-              Welcome to my Portfolio!
-            </h1>
-            <p className="text-xl">
-              I am Nguyễn Tấn Hùng, a Web Developer.
+          <div className="flex justify-center lg:justify-start">
+            <div className="rounded-full bg-sky-100 p-2 shadow-lg shadow-sky-100/80 dark:bg-slate-800 dark:shadow-none">
+              <Image
+                src="/avatar_trang_1_cd729c335b.jpg"
+                alt={`Avatar of ${SITE_NAME}`}
+                className="h-32 w-32 rounded-full object-cover sm:h-40 sm:w-40"
+                width={160}
+                height={160}
+                priority
+              />
+            </div>
+          </div>
+
+          <div className="flex flex-col justify-center text-center lg:text-left">
+            <p className="text-sm font-semibold uppercase tracking-[0.3em] text-sky-600 dark:text-sky-300">
+              Portfolio
             </p>
+            <h1 className="mt-4 text-4xl font-bold tracking-tight text-slate-950 dark:text-white sm:text-5xl">
+              {SITE_NAME}
+            </h1>
+            <p className="mt-4 text-xl text-slate-600 dark:text-slate-300">
+              {SITE_ROLE} focused on building maintainable and polished web
+              experiences.
+            </p>
+            <p className="mt-5 max-w-2xl text-base leading-7 text-slate-500 dark:text-slate-400">
+              I like turning product ideas into fast interfaces, improving user
+              journeys, and shipping frontend work that stays clean as projects
+              grow.
+            </p>
+
+            <div className="mt-8 flex flex-wrap items-center justify-center gap-3 lg:justify-start">
+              <Link
+                href="/#KinhNghiem"
+                className="rounded-full bg-sky-600 px-5 py-3 text-sm font-semibold text-white transition hover:bg-sky-700"
+              >
+                View Experience
+              </Link>
+              <Link
+                href="/ContestReport"
+                className="rounded-full border border-slate-300 px-5 py-3 text-sm font-semibold text-slate-700 transition hover:border-sky-400 hover:text-sky-600 dark:border-slate-700 dark:text-slate-200 dark:hover:border-sky-300 dark:hover:text-sky-300"
+              >
+                Explore Project Media
+              </Link>
+            </div>
           </div>
         </section>
 
-        {/* About section */}
         <About />
 
-        {/* Kỹ năng */}
-        <section ref={skillsRef} id="KyNang" className="mt-10">
-          <h2 className="text-2xl font-semibold mb-6">Skills</h2>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-
-            {/* Ngôn ngữ lập trình */}
-            <fieldset className="border border-slate-600 rounded-lg p-4">
-              <legend className="text-lg font-semibold text-indigo-400 px-2">Programming language</legend>
-              <ul className="grid grid-cols-2 gap-3 mt-2">
-                {['JavaScript', 'TypeScript', 'PHP'].map((skill, idx) => (
-                  <li key={idx} className="bg-slate-700 text-white px-3 py-2 rounded shadow-md text-sm text-center">
-                    {skill}
-                  </li>
-                ))}
-              </ul>
-            </fieldset>
-
-            {/* Frontend */}
-            <fieldset className="border border-slate-600 rounded-lg p-4">
-              <legend className="text-lg font-semibold text-indigo-400 px-2">Front end</legend>
-              <ul className="grid grid-cols-2 gap-3 mt-2">
-                {['ReactJS', 'Next.js', 'Tailwind CSS', 'Ant Design', 'SCSS'].map((skill, idx) => (
-                  <li key={idx} className="bg-slate-700 text-white px-3 py-2 rounded shadow-md text-sm text-center">
-                    {skill}
-                  </li>
-                ))}
-              </ul>
-            </fieldset>
-
-            {/* Backend */}
-            <fieldset className="border border-slate-600 rounded-lg p-4">
-              <legend className="text-lg font-semibold text-indigo-400 px-2">Back end</legend>
-              <ul className="grid grid-cols-2 gap-3 mt-2">
-                {['Node.js', 'NestJS', 'Laravel (PHP)'].map((skill, idx) => (
-                  <li key={idx} className="bg-slate-700 text-white px-3 py-2 rounded shadow-md text-sm text-center">
-                    {skill}
-                  </li>
-                ))}
-              </ul>
-            </fieldset>
-
-            <fieldset className="border border-slate-600 rounded-lg p-4">
-              <legend className="text-lg font-semibold text-indigo-400 px-2">Database & Tools</legend>
-              <ul className="grid grid-cols-2 gap-3 mt-2">
-                {['MongoDB', 'MySQL', 'Git', 'Figma', 'Postman', 'Vercel'].map((skill, idx) => (
-                  <li key={idx} className="bg-slate-700 text-white px-3 py-2 rounded shadow-md text-sm text-center">
-                    {skill}
-                  </li>
-                ))}
-              </ul>
-            </fieldset>
-
-            <fieldset className="border border-slate-600 rounded-lg p-4">
-              <legend className="text-lg font-semibold text-indigo-400 px-2">Library & Animation</legend>
-              <ul className="grid grid-cols-2 gap-3 mt-2">
-                {['GSAP', 'Frame-Motion'].map((skill, idx) => (
-                  <li key={idx} className="bg-slate-700 text-white px-3 py-2 rounded shadow-md text-sm text-center">
-                    {skill}
-                  </li>
-                ))}
-              </ul>
-            </fieldset>
-            <fieldset className="border border-slate-600 rounded-lg p-4">
-              <legend className="text-lg font-semibold text-indigo-400 px-2">State & Form Management</legend>
-              <ul className="grid grid-cols-2 gap-3 mt-2">
-                {['React Query', 'Zustand', 'Redux', 'React Hook Form', 'Custom Hooks'].map((skill, idx) => (
-                  <li key={idx} className="bg-slate-700 text-white px-3 py-2 rounded shadow-md text-sm text-center">
-                    {skill}
-                  </li>
-                ))}
-              </ul>
-            </fieldset>
-
-
-
+        <section
+          id="KyNang"
+          ref={(node) => {
+            if (node) {
+              sectionRefs.current[1] = node;
+            }
+          }}
+          className="scroll-mt-28"
+        >
+          <div className="mb-8">
+            <p className="text-sm font-semibold uppercase tracking-[0.25em] text-sky-600 dark:text-sky-300">
+              Skills
+            </p>
+            <h2 className="mt-3 text-3xl font-bold text-slate-950 dark:text-white">
+              Core tools and technologies
+            </h2>
           </div>
-        </section>
 
-        {/* Kinh nghiệm */}
-        <section ref={expRef} id="KinhNghiem" className="mt-10">
-          <h2 className="text-2xl font-semibold mb-4">Work Experience</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-8">
-
-            {/* SANTNS */}
-            <div className="bg-slate-700 text-white p-6 rounded-lg shadow-lg transition-transform transform hover:scale-105 hover:bg-slate-600 hover:shadow-xl">
-              <h3 className="text-xl font-medium mb-2">SANTNS - E-commerce Platform</h3>
-              <p className="text-slate-200 mb-2">Position: Front-End Developer | 11/2024 – 05/2025</p>
-              {/* <p className="text-sm text-slate-200 mb-2">SANTNS là một nền tảng thương mại điện tử cho phép người dùng mua sắm nhiều loại sản phẩm thuộc các danh mục khác nhau như thời trang, điện tử, đồ gia dụng và nhiều hơn nữa.
-                Phần backend của hệ thống đã được xây dựng sẵn để xử lý logic nghiệp vụ và xử lý dữ liệu.</p> */}
-              <p className="text-sm text-slate-200 mb-2">SANTNS is an e-commerce platform that allows users to shop for a wide range of products across various categories such as fashion, electronics, home appliances, and more.
-                The backend of the system has already been developed to handle business logic and data processing.</p>
-              {/* <ul className="mb-5 list-disc list-inside text-slate-200 text-sm leading-relaxed">
-                <li>Xây dựng giao diện người dùng responsive bằng Next.js</li>
-                <li>Tích hợp API để hiển thị dữ liệu sản phẩm theo thời gian thực</li>
-                <li>Sửa lỗi UI, tối ưu hiệu suất và trải nghiệm người dùng</li>
-                <li>Phối hợp với backend và thiết kế để đảm bảo tích hợp mượt mà</li>
-                <li>Stack: Next.js, Tailwind CSS, Ant Design, MongoDB, Node.js</li>
-              </ul> */}
-              <ul className="mb-5 list-disc list-inside text-slate-200 text-sm leading-relaxed">
-                <li>Developed a responsive user interface using Next.js</li>
-                <li>Integrated APIs to display real-time product data</li>
-                <li>Fixed UI bugs, optimized performance, and enhanced user experience</li>
-                <li>Collaborated with backend and design teams to ensure seamless integration</li>
-                <li>Stack: ReactJS, Next.js, Tailwind CSS, Ant Design, MongoDB, Node.js</li>
-              </ul>
-              <Button className='fixed bottom-0 mb-1' type="primary">
-                <Link target='_blank' href={`https://santns.com/vi`} className="mb-2">Link Web</Link>
-              </Button>
-            </div>
-
-            {/* Gao Huu Co TNS */}
-            <div className="bg-slate-700 text-white p-6 rounded-lg shadow-lg transition-transform transform hover:scale-105 hover:bg-slate-600 hover:shadow-xl">
-              <h3 className="text-xl font-medium mb-2">Gạo Hữu Cơ TNS</h3>
-              <p className="text-slate-200 mb-2">Position: Front-End Developer | 10/2023 – 02/2024</p>
-              {/* <p className="text-sm text-slate-200 mb-2">Trang web này được thiết kế để hiển thị các sản phẩm gạo hữu cơ và thông tin đại lý.
-                Người dùng có thể duyệt danh sách sản phẩm, tìm kiếm các loại gạo cụ thể và xem thông tin tổng quan về các đại lý.</p> */}
-              <p className="text-sm text-slate-200 mb-2">
-                This website is designed to showcase organic rice products and dealer information.
-                Users can browse the product catalog, search for specific rice types, and view an overview of dealers.
-              </p>
-              <ul className="mb-5 list-disc list-inside text-slate-200 text-sm leading-relaxed">
-                <li>Developed a website to showcase rice products and dealers</li>
-                <li>Built search functionality and product detail display</li>
-                <li>Designed and implemented responsive UI for products and dealers</li>
-                <li>Stack: ReactJS, Next.js, Tailwind CSS, Ant Design, Node.js, MongoDB</li>
-              </ul>
-              <Button className='fixed bottom-0 mb-1' type="primary">
-                <Link target='_blank' href={`https://gaohuucotaynam.com/vi`} className="mb-2">Link Web</Link>
-              </Button>
-            </div>
-
-            {/* Sekatsuku */}
-            <div className="bg-slate-700 text-white p-6 rounded-lg shadow-lg transition-transform transform hover:scale-105 hover:bg-slate-600 hover:shadow-xl">
-              <h3 className="text-xl font-medium mb-2">Sekatsuku</h3>
-              <p className="text-slate-200 mb-2">Position: Front-End Developer | 06/2024 – 09/2024</p>
-              {/* <p className="text-sm text-slate-200 mb-2">Trang web này kết nối các đối tác từ Việt Nam và Nhật Bản.
-                Trang web sẽ cập nhật thông tin về các công ty Việt Nam và Nhật Bản thuộc nhiều lĩnh vực khác nhau để kết nối và hợp tác kinh doanh.</p> */}
-              <p className="text-sm text-slate-200 mb-2">
-                This website connects partners from Vietnam and Japan.
-                It provides updated information about Vietnamese and Japanese companies across various industries to foster networking and business collaboration.
-              </p>
-              {/* <ul className="mb-5 list-disc list-inside text-slate-200 text-sm leading-relaxed">
-                <li>Thiết kế giao diện quản lý cuộc gọi và danh sách cuộc gọi</li>
-                <li>Map API lịch sử cuộc gọi, lời nhắc và phân quyền người dùng</li>
-                <li>Stack: ReactJS, Next.js, TailwindCSS, NextUI, MySQL</li>
-              </ul> */}
-              <ul className="mb-5 list-disc list-inside text-slate-200 text-sm leading-relaxed">
-                <li>Designed the UI for call management and call list</li>
-                <li>Integrated APIs for call history, reminders, and user role management</li>
-                <li>Stack: ReactJS, Next.js, TailwindCSS, NextUI, MySQL</li>
-              </ul>
-              {/* <Button className='fixed bottom-0 mb-1' type="primary">
-                <Link target='_blank' href={`https://vj-digital.com/`} className="mb-2">Link Web</Link>
-              </Button> */}
-            </div>
-
-            {/* Viet Japan Connect */}
-            <div className="bg-slate-700 text-white p-6 rounded-lg shadow-lg transition-transform transform hover:scale-105 hover:bg-slate-600 hover:shadow-xl">
-              <h3 className="text-xl font-medium mb-2">Viet Japan Connect</h3>
-              <p className="text-slate-200 mb-2">Position: Front-End Developer | 03/2024 – 06/2024</p>
-              {/* <p className="text-sm text-slate-200 mb-2">Trang web này đại diện cho hệ thống telesale, nơi người dùng có thể thực hiện và quản lý số lượng lớn danh sách cuộc gọi.
-                Hệ thống tổ chức các nhóm quản lý cuộc gọi và người dùng dịch vụ để kiểm soát toàn bộ thông tin liên quan đến cuộc gọi.</p> */}
-              <p className="text-sm text-slate-200 mb-2">
-                This website represents a telesales system where users can perform and manage large call lists.
-                The system organizes call management groups and service users to maintain full control over all call-related information.
-              </p>
-              <ul className="mb-5 list-disc list-inside text-slate-200 text-sm leading-relaxed">
-                <li>Designed article UI and integrated APIs to connect with businesses</li>
-                <li>Implemented automated multilingual support for input forms</li>
-                <li>Stack: ReactJS, Next.js, SCSS, Ant Design, Node.js, MySQL</li>
-              </ul>
-              <Button className='fixed bottom-0 mb-1' type="primary">
-                <Link target='_blank' href={`https://vjp-connect.com/vi`} className="mb-2">Link Web</Link>
-              </Button>
-            </div>
-
-          </div>
-        </section>
-
-
-        {/* Dự án học tập */}
-        {/* <section ref={projectRef} id="DuAn" className="mt-10">
-          <h2 className="text-2xl font-semibold mb-4">Dự án học tập</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[
-              {
-                title: 'Ứng dụng quản lý hiến máu',
-                desc: 'Một trang web vì cộng đồng người hiến máu sử dụng công nghệ NextJs, Nestjs.',
-                linkFE: 'https://github.com/MeGaOne47/DonationBlood_Next13_Client_Main',
-                linkBE: 'https://github.com/MeGaOne47/nest-crud-app',
-              },
-              {
-                title: 'Ứng dụng quản lý bán hàng',
-                desc: 'Ứng dụng giúp người dùng bán và quản lý các mặt hàng sử dụng công nghệ PHP OOP.',
-                linkFE: 'https://github.com/nguyentanhung/todolist',
-              },
-            ].map((project, idx) => (
-              <div key={idx} className="bg-slate-700 text-white p-6 rounded-lg shadow-lg transition-transform transform hover:scale-105 hover:bg-slate-600 hover:shadow-xl">
-                <h3 className="text-xl font-medium mb-2">{project.title}</h3>
-                <p className="text-slate-200">{project.desc}</p>
-                <a href={project.linkFE} className="text-blue-300 mt-4 inline-block" target="_blank">Xem trên GitHub FE</a>
-                {project.linkBE && (
-                  <>
-                    <br />
-                    <a href={project.linkBE} className="text-blue-300 mt-2 inline-block" target="_blank">Xem trên GitHub BE</a>
-                  </>
-                )}
-              </div>
+          <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+            {SKILL_GROUPS.map((group) => (
+              <fieldset
+                key={group.title}
+                className="rounded-[1.75rem] border border-slate-200 bg-white/85 p-5 shadow-sm transition hover:-translate-y-1 hover:shadow-lg dark:border-slate-800 dark:bg-slate-900/75"
+              >
+                <legend className="px-2 text-sm font-semibold uppercase tracking-[0.2em] text-sky-600 dark:text-sky-300">
+                  {group.title}
+                </legend>
+                <ul className="mt-4 grid grid-cols-2 gap-3">
+                  {group.items.map((skill) => (
+                    <li
+                      key={skill}
+                      className="rounded-2xl bg-slate-100 px-3 py-2 text-center text-sm font-medium text-slate-700 dark:bg-slate-800 dark:text-slate-100"
+                    >
+                      {skill}
+                    </li>
+                  ))}
+                </ul>
+              </fieldset>
             ))}
           </div>
-        </section> */}
+        </section>
 
+        <section
+          id="KinhNghiem"
+          ref={(node) => {
+            if (node) {
+              sectionRefs.current[2] = node;
+            }
+          }}
+          className="scroll-mt-28"
+        >
+          <div className="mb-8">
+            <p className="text-sm font-semibold uppercase tracking-[0.25em] text-sky-600 dark:text-sky-300">
+              Experience
+            </p>
+            <h2 className="mt-3 text-3xl font-bold text-slate-950 dark:text-white">
+              Selected work and product experience
+            </h2>
+          </div>
+
+          <div className="grid gap-6 lg:grid-cols-2">
+            {EXPERIENCES.map((experience) => (
+              <article
+                key={experience.title}
+                className="flex h-full flex-col rounded-[2rem] border border-slate-200 bg-white/90 p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-xl dark:border-slate-800 dark:bg-slate-900/80"
+              >
+                <div>
+                  <p className="text-sm font-semibold uppercase tracking-[0.2em] text-sky-600 dark:text-sky-300">
+                    {experience.role}
+                  </p>
+                  <h3 className="mt-3 text-2xl font-semibold text-slate-950 dark:text-white">
+                    {experience.title}
+                  </h3>
+                  <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
+                    {experience.subtitle} • {experience.period}
+                  </p>
+                  <p className="mt-4 leading-7 text-slate-600 dark:text-slate-300">
+                    {experience.summary}
+                  </p>
+                </div>
+
+                <ul className="mt-6 space-y-3 text-sm leading-6 text-slate-600 dark:text-slate-300">
+                  {experience.highlights.map((highlight) => (
+                    <li key={highlight} className="flex gap-3">
+                      <span className="mt-2 h-2 w-2 rounded-full bg-sky-500" />
+                      <span>{highlight}</span>
+                    </li>
+                  ))}
+                </ul>
+
+                <div className="mt-6 flex flex-wrap gap-2">
+                  {experience.stack.map((item) => (
+                    <span
+                      key={item}
+                      className="rounded-full border border-slate-200 px-3 py-1 text-xs font-medium text-slate-600 dark:border-slate-700 dark:text-slate-300"
+                    >
+                      {item}
+                    </span>
+                  ))}
+                </div>
+
+                {experience.link ? (
+                  <div className="mt-6">
+                    <Link
+                      href={experience.link}
+                      target="_blank"
+                      className="inline-flex rounded-full bg-slate-950 px-4 py-2 text-sm font-semibold text-white transition hover:bg-sky-600 dark:bg-white dark:text-slate-950 dark:hover:bg-sky-300"
+                    >
+                      Visit project
+                    </Link>
+                  </div>
+                ) : null}
+              </article>
+            ))}
+          </div>
+        </section>
       </main>
 
       {showIntro && (
         <div
           ref={introRef}
-          className="fixed inset-0 flex items-center justify-center px-4 text-center bg-gradient-to-r from-purple-900 via-black to-indigo-900 text-white z-50"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-[radial-gradient(circle_at_top,_#0f172a,_#020617_60%)] px-4 text-center text-white"
         >
           <h1
             ref={textRef}
-            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-widest flex flex-wrap justify-center gap-y-2"
+            className="flex flex-wrap justify-center gap-y-2 text-3xl font-extrabold tracking-[0.3em] sm:text-5xl"
           >
-            {"Welcome To My Portfolio".split("").map((char, i) => (
-              <span key={i} className="inline-block">
-                {char === " " ? "\u00A0" : char}
+            {'Welcome To My Portfolio'.split('').map((char, index) => (
+              <span key={`${char}-${index}`} className="inline-block">
+                {char === ' ' ? '\u00A0' : char}
               </span>
             ))}
           </h1>

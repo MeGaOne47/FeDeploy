@@ -1,16 +1,9 @@
-"use client"
-import dynamic from 'next/dynamic';
-const List_Image = dynamic(() => import('@/components/List_Image/List_Image'));
+import ListImage from "@/components/List_Image/List_Image";
 
-const UploadPage = () => {
-
+export default function ListImagePage() {
   return (
-    <div style={{ padding: '20px' }}>
-      <h1 style={{textAlign: 'center'}}>Hung Nguyen</h1>
-      <List_Image/>
+    <div className="px-4 py-8 sm:px-6 lg:px-8">
+      <ListImage />
     </div>
   );
-};
-
-export default UploadPage;
-
+}

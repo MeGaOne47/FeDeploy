@@ -1,88 +1,96 @@
-'use client';
+"use client";
 
-import { useEffect, useRef } from 'react';
-import gsap from 'gsap';
+import { useEffect, useRef } from "react";
+
+type Flake = {
+  d: number;
+  r: number;
+  x: number;
+  y: number;
+};
 
 export default function SnowEffect() {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
   useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
-
-    let W = window.innerWidth;
-    let H = window.innerHeight;
-    canvas.width = W;
-    canvas.height = H;
-
-    const maxFlakes = 100;
-    const flakes: any[] = [];
-
-    for (let i = 0; i < maxFlakes; i++) {
-      flakes.push({
-        x: Math.random() * W,
-        y: Math.random() * H,
-        r: Math.random() * 4 + 1,
-        d: Math.random() * maxFlakes,
-      });
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      return;
     }
 
-    const drawFlakes = () => {
-      ctx.clearRect(0, 0, W, H);
-      ctx.fillStyle = 'white';
-      ctx.beginPath();
-      for (let i = 0; i < maxFlakes; i++) {
-        const f = flakes[i];
-        ctx.moveTo(f.x, f.y);
-        ctx.arc(f.x, f.y, f.r, 0, Math.PI * 2, true);
-      }
-      ctx.fill();
-      moveFlakes();
-    };
+    const canvas = canvasRef.current;
+    if (!canvas) {
+      return;
+    }
 
+    const context = canvas.getContext("2d");
+    if (!context) {
+      return;
+    }
+
+    const flakeCount = window.innerWidth < 768 ? 40 : 80;
+    const flakes: Flake[] = Array.from({ length: flakeCount }, () => ({
+      d: Math.random() * flakeCount,
+      r: Math.random() * 3 + 1,
+      x: Math.random() * window.innerWidth,
+      y: Math.random() * window.innerHeight,
+    }));
+
+    let animationFrameId = 0;
     let angle = 0;
+    let width = window.innerWidth;
+    let height = window.innerHeight;
+
+    const resizeCanvas = () => {
+      width = window.innerWidth;
+      height = window.innerHeight;
+      canvas.width = width;
+      canvas.height = height;
+    };
 
     const moveFlakes = () => {
       angle += 0.01;
-      for (let i = 0; i < maxFlakes; i++) {
-        const f = flakes[i];
-        f.y += Math.cos(angle + f.d) + 1 + f.r / 2;
-        f.x += Math.sin(angle) * 2;
 
-        if (f.y > H) {
-          flakes[i] = { x: Math.random() * W, y: 0, r: f.r, d: f.d };
+      flakes.forEach((flake) => {
+        flake.y += Math.cos(angle + flake.d) + 1 + flake.r / 2;
+        flake.x += Math.sin(angle) * 1.5;
+
+        if (flake.y > height) {
+          flake.y = -10;
+          flake.x = Math.random() * width;
         }
-      }
+      });
     };
 
-    const animate = () => {
-      drawFlakes();
-      requestAnimationFrame(animate);
+    const drawFlakes = () => {
+      context.clearRect(0, 0, width, height);
+      context.fillStyle = "rgba(255,255,255,0.8)";
+      context.beginPath();
+
+      flakes.forEach((flake) => {
+        context.moveTo(flake.x, flake.y);
+        context.arc(flake.x, flake.y, flake.r, 0, Math.PI * 2, true);
+      });
+
+      context.fill();
+      moveFlakes();
+      animationFrameId = window.requestAnimationFrame(drawFlakes);
     };
 
-    animate();
-
-    const handleResize = () => {
-      W = window.innerWidth;
-      H = window.innerHeight;
-      canvas.width = W;
-      canvas.height = H;
-    };
-
-    window.addEventListener('resize', handleResize);
+    resizeCanvas();
+    drawFlakes();
+    window.addEventListener("resize", resizeCanvas);
 
     return () => {
-      window.removeEventListener('resize', handleResize);
+      window.removeEventListener("resize", resizeCanvas);
+      window.cancelAnimationFrame(animationFrameId);
     };
   }, []);
 
   return (
     <canvas
       ref={canvasRef}
-      className="fixed top-0 left-0 w-full h-full pointer-events-none z-[999]"
+      aria-hidden="true"
+      className="pointer-events-none fixed inset-0 z-0 opacity-70"
     />
   );
 }

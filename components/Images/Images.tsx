@@ -1,60 +1,63 @@
-import React from 'react';
+"use client";
 
-const imagesData = [
-  {
-    id: 1,
-    src: '/h1.jpg',
-    title: 'Hình ảnh tấm pin năng lượng mặt trời, có bộ nạp pin'
-  },
-  {
-    id: 2,
-    src: '/h2.jpg',
-    title: 'Hình ảnh thân tháp hoàn thiện'
-  },
-  {
-    id: 3,
-    src: '/h3.jpg',
-    title: ''
-  },
-  {
-    id: 4,
-    src: '/h4.jpg',
-    title: ''
-  },
-  {
-    id: 5,
-    src: '/h5.jpg',
-    title: ''
-  },
-  {
-    id: 6,
-    src: '/h6.jpg',
-    title: 'Hình ảnh tháp đang được thử nghiệm'
-  },
-  {
-    id: 7,
-    src: '/h7.jpg',
-    title: ''
-  },
-  {
-    id: 8,
-    src: '/h8.jpg',
-    title: 'Hình ảnh tháp đã hoàn thiện giữa tấm pin năng lượng mặt trời và thân tháp'
-  },
-  // Thêm hình ảnh khác tại đây...
-];
+import { useState } from "react";
+import { GALLERY_ITEMS } from "@/app/site-config";
 
-const Images = () => {
+function GalleryCard({
+  src,
+  title,
+}: {
+  src: string;
+  title: string;
+}) {
+  const [hasError, setHasError] = useState(false);
+
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4">
-      {imagesData.map((image) => (
-        <div key={image.id} className="flex flex-col items-center">
-          <img src={image.src} alt={image.title} className="w-full h-auto object-cover rounded-lg" />
-          <h3 className="mt-2 text-center text-lg font-semibold">{image.title}</h3>
+    <article className="overflow-hidden rounded-[1.5rem] border border-slate-200 bg-white shadow-sm dark:border-slate-800 dark:bg-slate-950">
+      {!hasError ? (
+        <img
+          src={src}
+          alt={title}
+          loading="lazy"
+          onError={() => setHasError(true)}
+          className="h-64 w-full object-cover"
+        />
+      ) : (
+        <div className="flex h-64 items-center justify-center bg-slate-100 px-6 text-center text-sm leading-6 text-slate-500 dark:bg-slate-900 dark:text-slate-400">
+          Chua tim thay asset <code>{src}</code> trong thu muc public.
         </div>
-      ))}
-    </div>
-  );
-};
+      )}
 
-export default Images;
+      <div className="p-4">
+        <h3 className="text-base font-semibold text-slate-900 dark:text-white">
+          {title}
+        </h3>
+      </div>
+    </article>
+  );
+}
+
+export default function Images() {
+  return (
+    <section className="mx-auto max-w-7xl">
+      <div className="mb-8 text-center">
+        <p className="text-sm font-semibold uppercase tracking-[0.25em] text-sky-600 dark:text-sky-300">
+          Gallery
+        </p>
+        <h1 className="mt-3 text-3xl font-bold text-slate-950 dark:text-white">
+          Hinh anh du an
+        </h1>
+        <p className="mt-3 text-sm leading-6 text-slate-500 dark:text-slate-400">
+          Trang da co fallback de khong bi vo giao dien khi file media chua duoc
+          them vao <code>/public</code>.
+        </p>
+      </div>
+
+      <div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-4">
+        {GALLERY_ITEMS.map((image) => (
+          <GalleryCard key={image.id} src={image.src} title={image.title} />
+        ))}
+      </div>
+    </section>
+  );
+}

@@ -1,22 +1,25 @@
 "use client";
-import React from "react";
 
 interface PDFViewProps {
-  url: string;
+  onLoad?: () => void;
+  src: string;
+  title?: string;
 }
 
-const PDFView: React.FC<PDFViewProps> = ({ url }) => {
-  console.log("url", url);
+export default function PDFView({
+  onLoad,
+  src,
+  title = "PDF Viewer",
+}: PDFViewProps) {
   return (
-    <div>
-      <iframe
-        src={`https://docs.google.com/gview?url=${url}&embedded=true`}
-        width="100%"
-        height="800px"
-      ></iframe>
-    </div>
+    <iframe
+      src={src}
+      width="100%"
+      height="720"
+      className="min-h-[70vh] w-full rounded-3xl border border-slate-200 bg-white shadow-sm dark:border-slate-800 dark:bg-slate-950"
+      style={{ border: "none" }}
+      title={title}
+      onLoad={onLoad}
+    />
   );
-};
-
-export default PDFView;
-
+}

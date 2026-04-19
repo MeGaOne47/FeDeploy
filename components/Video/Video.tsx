@@ -1,34 +1,76 @@
-import React from 'react';
+"use client";
 
-const Video = () => {
+import { useState } from "react";
+import { VIDEO_ITEMS } from "@/app/site-config";
+
+function VideoCard({
+  description,
+  src,
+  title,
+}: {
+  description: string;
+  src: string;
+  title: string;
+}) {
+  const [hasError, setHasError] = useState(false);
+
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4">
-      {/* Video 1 */}
-      <h3>Video thử nghiệm làm thực tế ở sông đèn đã báo đến mức độ nguy hiểm.</h3>
-      <div className="flex flex-col justify-center items-center">
-        <h3 className="text-xl font-semibold mb-2">Video Thử Nghiệm 1</h3>
-        <video className="w-full h-auto" controls loop muted>
-          <source src="/6140204523240.mp4" type="video/mp4" />
+    <article className="overflow-hidden rounded-[1.5rem] border border-slate-200 bg-white shadow-sm dark:border-slate-800 dark:bg-slate-950">
+      {!hasError ? (
+        <video
+          controls
+          muted
+          playsInline
+          preload="metadata"
+          onError={() => setHasError(true)}
+          className="aspect-video w-full bg-black"
+        >
+          <source src={src} type="video/mp4" />
         </video>
-      </div>
+      ) : (
+        <div className="flex aspect-video items-center justify-center bg-slate-100 px-6 text-center text-sm leading-6 text-slate-500 dark:bg-slate-900 dark:text-slate-400">
+          Chua tim thay asset <code>{src}</code> trong thu muc public.
+        </div>
+      )}
 
-      {/* Video 2 */}
-      <div className="flex flex-col justify-center items-center">
-        <h3 className="text-xl font-semibold mb-2">Video Thử Nghiệm 2</h3>
-        <video className="w-full h-auto" controls loop muted>
-          <source src="/6140211306917.mp4" type="video/mp4" />
-        </video>
+      <div className="p-4">
+        <h3 className="text-lg font-semibold text-slate-900 dark:text-white">
+          {title}
+        </h3>
+        <p className="mt-2 text-sm leading-6 text-slate-500 dark:text-slate-400">
+          {description}
+        </p>
       </div>
-
-      {/* Video 3 */}
-      <div className="flex flex-col justify-center items-center">
-        <h3 className="text-xl font-semibold mb-2">Video Thử Nghiệm 3</h3>
-        <video className="w-full h-auto" controls loop muted>
-          <source src="/6140808921635.mp4" type="video/mp4" />
-        </video>
-      </div>
-    </div>
+    </article>
   );
-};
+}
 
-export default Video;
+export default function Video() {
+  return (
+    <section className="mx-auto max-w-6xl">
+      <div className="mb-8 text-center">
+        <p className="text-sm font-semibold uppercase tracking-[0.25em] text-emerald-600 dark:text-emerald-300">
+          Video
+        </p>
+        <h1 className="mt-3 text-3xl font-bold text-slate-950 dark:text-white">
+          Video thu nghiem
+        </h1>
+        <p className="mt-3 text-sm leading-6 text-slate-500 dark:text-slate-400">
+          Moi the hien se hien placeholder thay vi video bi hong neu asset chua
+          co trong <code>/public</code>.
+        </p>
+      </div>
+
+      <div className="grid gap-6 lg:grid-cols-3">
+        {VIDEO_ITEMS.map((video) => (
+          <VideoCard
+            key={video.id}
+            description={video.description}
+            src={video.src}
+            title={video.title}
+          />
+        ))}
+      </div>
+    </section>
+  );
+}

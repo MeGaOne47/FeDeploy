@@ -1,61 +1,42 @@
-'use client';
-import React, { useEffect, useRef } from 'react';
-import { FacebookOutlined, GithubOutlined, YoutubeOutlined } from '@ant-design/icons';
-import gsap from 'gsap';
+import { Facebook, Github } from "lucide-react";
+import { SOCIAL_LINKS, SITE_NAME } from "@/app/site-config";
 
-const FooterComponent: React.FC = () => {
-  const footerRef = useRef<HTMLElement | null>(null);
+const iconMap = {
+  Facebook,
+  GitHub: Github,
+} as const;
 
-  useEffect(() => {
-    gsap.fromTo(
-      footerRef.current,
-      { y: 50, opacity: 0 },
-      {
-        y: 0,
-        opacity: 1,
-        duration: 0.8,
-        ease: 'power2.out',
-      }
-    );
-  }, []);
-
+export default function FooterComponent() {
   return (
-    <footer
-      ref={footerRef}
-      className="py-6 w-full bg-gray-100 text-gray-800 dark:bg-slate-900 dark:text-white transition-colors duration-500"
-    >
-      <div className="text-center text-sm sm:text-base mb-3">
-        &copy; 2024 <span className="font-semibold">Nguyễn Tấn Hùng</span>. All rights reserved.
-      </div>
+    <footer className="border-t border-slate-200 bg-slate-50/80 py-8 text-slate-600 transition-colors dark:border-slate-800 dark:bg-slate-950 dark:text-slate-300">
+      <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-4 text-center sm:flex-row sm:px-6 lg:px-8">
+        <p className="text-sm">
+          &copy; {new Date().getFullYear()}{" "}
+          <span className="font-semibold text-slate-900 dark:text-white">
+            {SITE_NAME}
+          </span>
+          . All rights reserved.
+        </p>
 
-      <div className="flex justify-center space-x-6 text-xl">
-        <a
-          href="https://www.facebook.com/profile.php?id=100028399301933"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="transition-transform transform hover:scale-110 hover:text-blue-500"
-        >
-          <FacebookOutlined />
-        </a>
-        <a
-          href="https://github.com/MeGaOne47"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="transition-transform transform hover:scale-110 hover:text-black dark:hover:text-gray-300"
-        >
-          <GithubOutlined />
-        </a>
-        {/* <a
-          href="https://www.youtube.com/channel/UC2lPzjPXjeV2HoRPI2IJuiQ"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="transition-transform transform hover:scale-110 hover:text-red-500"
-        >
-          <YoutubeOutlined />
-        </a> */}
+        <div className="flex items-center gap-3">
+          {SOCIAL_LINKS.map((item) => {
+            const Icon = iconMap[item.label];
+
+            return (
+              <a
+                key={item.href}
+                href={item.href}
+                target="_blank"
+                rel="noreferrer"
+                aria-label={item.label}
+                className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 text-slate-600 transition hover:-translate-y-0.5 hover:border-sky-400 hover:text-sky-600 dark:border-slate-800 dark:text-slate-300 dark:hover:border-sky-300 dark:hover:text-sky-300"
+              >
+                <Icon className="h-4 w-4" />
+              </a>
+            );
+          })}
+        </div>
       </div>
     </footer>
   );
-};
-
-export default FooterComponent;
+}

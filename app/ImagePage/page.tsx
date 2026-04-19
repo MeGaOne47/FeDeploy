@@ -1,28 +1,9 @@
-"use client";
-import { Spin } from 'antd';
-import dynamic from "next/dynamic";
-import { useState, useEffect } from "react";
+import Images from "@/components/Images/Images";
 
-const Image = dynamic(() => import('@/components/Images/Images'), { ssr: false }); // Chỉ render ở client
-
-const PDFViewPage = () => {
-  const [loading, setLoading] = useState(true); // Trạng thái loading
-
-  useEffect(() => {
-    // Khi component đã render xong, đặt loading là false
-    setLoading(false);
-  }, []);
-
+export default function ImagePage() {
   return (
-    <div style={{ padding: '20px', position: 'relative' }}>
-      {loading && (
-        <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}>
-          <Spin size="large" tip="Đang tải..." /> {/* Hiển thị loading */}
-        </div>
-      )}
-      <Image />
+    <div className="px-4 py-8 sm:px-6 lg:px-8">
+      <Images />
     </div>
   );
-};
-
-export default PDFViewPage;
+}

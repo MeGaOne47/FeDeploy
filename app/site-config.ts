@@ -50,8 +50,6 @@ export const ROOT_METADATA: Metadata = {
 };
 
 export const SHELLLESS_ROUTES = [
-  "/ContestReport",
-  "/PDFView",
   "/Video",
   "/ImagePage",
 ];
@@ -167,78 +165,6 @@ export const SOCIAL_LINKS = [
   {
     label: "GitHub",
     href: "https://github.com/MeGaOne47",
-  },
-] as const;
-
-export const CONTEST_DOCUMENTS = [
-  { file: "1.pdf", label: "Bao cao du an", variant: "primary" },
-  { file: "2.pdf", label: "Ke hoach nghien cuu", variant: "primary" },
-  { file: "3.pdf", label: "Ban thuyet trinh", variant: "primary" },
-  { href: "/ImagePage", label: "Hinh anh", variant: "secondary" },
-  { href: "/Video", label: "Video", variant: "success" },
-] as const;
-
-export const GALLERY_ITEMS = [
-  {
-    id: "h1",
-    src: "/h1.jpg",
-    title: "Tam pin nang luong mat troi va bo nap pin",
-  },
-  {
-    id: "h2",
-    src: "/h2.jpg",
-    title: "Than thap da hoan thien",
-  },
-  {
-    id: "h3",
-    src: "/h3.jpg",
-    title: "Goc chup thi cong so 1",
-  },
-  {
-    id: "h4",
-    src: "/h4.jpg",
-    title: "Goc chup thi cong so 2",
-  },
-  {
-    id: "h5",
-    src: "/h5.jpg",
-    title: "Goc chup thi cong so 3",
-  },
-  {
-    id: "h6",
-    src: "/h6.jpg",
-    title: "Thap trong qua trinh thu nghiem",
-  },
-  {
-    id: "h7",
-    src: "/h7.jpg",
-    title: "Chi tiet bo phan lap dat",
-  },
-  {
-    id: "h8",
-    src: "/h8.jpg",
-    title: "Thap hoan thien voi tam pin va than tru",
-  },
-] as const;
-
-export const VIDEO_ITEMS = [
-  {
-    id: "video-1",
-    src: "/6140204523240.mp4",
-    title: "Video thu nghiem 1",
-    description: "Mo phong muc do canh bao tai song den trong bai thu nghiem.",
-  },
-  {
-    id: "video-2",
-    src: "/6140211306917.mp4",
-    title: "Video thu nghiem 2",
-    description: "Ghi lai giai doan van hanh cua mo hinh canh bao lu.",
-  },
-  {
-    id: "video-3",
-    src: "/6140808921635.mp4",
-    title: "Video thu nghiem 3",
-    description: "Tong hop them mot lan thu nghiem ngoai thuc te.",
   },
 ] as const;
 

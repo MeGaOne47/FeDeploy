@@ -139,12 +139,6 @@ export default function HomeIndex() {
               >
                 View Experience
               </Link>
-              <Link
-                href="/ContestReport"
-                className="rounded-full border border-slate-300 px-5 py-3 text-sm font-semibold text-slate-700 transition hover:border-sky-400 hover:text-sky-600 dark:border-slate-700 dark:text-slate-200 dark:hover:border-sky-300 dark:hover:text-sky-300"
-              >
-                Explore Project Media
-              </Link>
             </div>
           </div>
         </section>

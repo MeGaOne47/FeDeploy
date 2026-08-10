@@ -2,30 +2,21 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { MoonIcon, SunIcon } from "@heroicons/react/24/outline";
 import { Menu, X } from "lucide-react";
 import { usePathname } from "next/navigation";
-import { useTheme } from "next-themes";
 import { NAV_ITEMS, SITE_NAME } from "@/app/site-config";
 import LanguageToggle from "@/components/Layout/LanguageToggle";
+import ThemeToggle from "@/components/Layout/ThemeToggle";
 import { useLanguage } from "@/components/Layout/LanguageProvider";
 
 export default function HeaderComponent() {
   const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [mounted, setMounted] = useState(false);
-  const { resolvedTheme, setTheme } = useTheme();
   const { language } = useLanguage();
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
 
   useEffect(() => {
     setIsMenuOpen(false);
   }, [pathname]);
-
-  const isDark = resolvedTheme === "dark";
 
   return (
     <header className="sticky top-0 z-50 border-b border-slate-200/70 bg-white/85 backdrop-blur-xl transition-colors dark:border-slate-800/70 dark:bg-slate-950/80">
@@ -51,43 +42,12 @@ export default function HeaderComponent() {
             ))}
           </ul>
 
-          <button
-            type="button"
-            onClick={() => setTheme(isDark ? "light" : "dark")}
-            className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 text-slate-700 transition hover:border-sky-400 hover:text-sky-600 dark:border-slate-700 dark:text-slate-100 dark:hover:border-sky-300 dark:hover:text-sky-300"
-            aria-label="Toggle color theme"
-          >
-            {mounted ? (
-              isDark ? (
-                <SunIcon className="h-5 w-5" />
-              ) : (
-                <MoonIcon className="h-5 w-5" />
-              )
-            ) : (
-              <span className="h-5 w-5" />
-            )}
-          </button>
+          <ThemeToggle />
           <LanguageToggle />
         </div>
 
         <div className="flex items-center gap-2 sm:hidden">
-          <button
-            type="button"
-            onClick={() => setTheme(isDark ? "light" : "dark")}
-            className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 text-slate-700 transition hover:border-sky-400 hover:text-sky-600 dark:border-slate-700 dark:text-slate-100 dark:hover:border-sky-300 dark:hover:text-sky-300"
-            aria-label="Toggle color theme"
-          >
-            {mounted ? (
-              isDark ? (
-                <SunIcon className="h-5 w-5" />
-              ) : (
-                <MoonIcon className="h-5 w-5" />
-              )
-            ) : (
-              <span className="h-5 w-5" />
-            )}
-          </button>
-
+          <ThemeToggle />
           <LanguageToggle />
 
           <button

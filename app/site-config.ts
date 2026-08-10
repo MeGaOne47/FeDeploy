@@ -17,7 +17,6 @@ export const SITE_NAME = "Hung Nguyen";
 export const SITE_ROLE = "Frontend Developer";
 export const SITE_URL = "https://be-deploy.vercel.app";
 export const SITE_DESCRIPTION = "Portfolio cua Hung Nguyen, tap trung vao Next.js, React va cac du an frontend.";
-export const SERVER_DOMAIN = process.env.NEXT_PUBLIC_SERVER_DOMAIN?.replace(/\/$/, "") ?? SITE_URL;
 
 export const ROOT_METADATA: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -99,5 +98,3 @@ export const SOCIAL_LINKS = [
   { label: "GitHub", href: "https://github.com/MeGaOne47" },
 ] as const;
 
-export function buildServerAssetUrl(pathname: string) { return `${SERVER_DOMAIN}${pathname.startsWith("/") ? pathname : `/${pathname}`}`; }
-export function buildGoogleViewerUrl(file: string) { return `https://docs.google.com/gview?url=${encodeURIComponent(buildServerAssetUrl(`/view/${file}`))}&embedded=true`; }

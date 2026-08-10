@@ -2,6 +2,7 @@
 
 import { ThemeProvider } from "next-themes";
 import type { ReactNode } from "react";
+import LanguageProvider from "@/components/Layout/LanguageProvider";
 
 interface AppProvidersProps {
   children: ReactNode;
@@ -15,7 +16,7 @@ export default function AppProviders({ children }: AppProvidersProps) {
       disableTransitionOnChange
       enableSystem
     >
-      {children}
+      <LanguageProvider>{children}</LanguageProvider>
     </ThemeProvider>
   );
 }

@@ -6,6 +6,8 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Image from 'next/image';
 import Link from 'next/link';
 import About from '../About/about';
+import { CONTENT } from "@/app/site-config";
+import { useLanguage } from "@/components/Layout/LanguageProvider";
 import SnowEffect from '../SnowEffect/SnowEffect';
 import {
   EXPERIENCES,
@@ -17,6 +19,8 @@ import {
 gsap.registerPlugin(ScrollTrigger);
 
 export default function HomeIndex() {
+  const { language } = useLanguage();
+  const content = CONTENT[language];
   const [showIntro, setShowIntro] = useState(true);
   const rootRef = useRef<HTMLDivElement | null>(null);
   const introRef = useRef<HTMLDivElement | null>(null);
@@ -116,20 +120,15 @@ export default function HomeIndex() {
           </div>
 
           <div className="flex flex-col justify-center text-center lg:text-left">
-            <p className="text-sm font-semibold uppercase tracking-[0.3em] text-sky-600 dark:text-sky-300">
-              Portfolio
-            </p>
+            <p className="text-sm font-semibold uppercase tracking-[0.3em] text-sky-600 dark:text-sky-300">{content.heroKicker}</p>
             <h1 className="mt-4 text-4xl font-bold tracking-tight text-slate-950 dark:text-white sm:text-5xl">
               {SITE_NAME}
             </h1>
             <p className="mt-4 text-xl text-slate-600 dark:text-slate-300">
-              {SITE_ROLE} focused on building maintainable and polished web
-              experiences.
+              {content.heroTitle}
             </p>
             <p className="mt-5 max-w-2xl text-base leading-7 text-slate-500 dark:text-slate-400">
-              I like turning product ideas into fast interfaces, improving user
-              journeys, and shipping frontend work that stays clean as projects
-              grow.
+              {content.heroDescription}
             </p>
 
             <div className="mt-8 flex flex-wrap items-center justify-center gap-3 lg:justify-start">
@@ -137,7 +136,7 @@ export default function HomeIndex() {
                 href="/#KinhNghiem"
                 className="rounded-full bg-sky-600 px-5 py-3 text-sm font-semibold text-white transition hover:bg-sky-700"
               >
-                View Experience
+                {content.viewExperience}
               </Link>
             </div>
           </div>
@@ -155,16 +154,14 @@ export default function HomeIndex() {
           className="scroll-mt-28"
         >
           <div className="mb-8">
-            <p className="text-sm font-semibold uppercase tracking-[0.25em] text-sky-600 dark:text-sky-300">
-              Skills
-            </p>
+            <p className="text-sm font-semibold uppercase tracking-[0.25em] text-sky-600 dark:text-sky-300">{content.skillsKicker}</p>
             <h2 className="mt-3 text-3xl font-bold text-slate-950 dark:text-white">
-              Core tools and technologies
+              {content.skillsTitle}
             </h2>
           </div>
 
           <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-            {SKILL_GROUPS.map((group) => (
+            {SKILL_GROUPS[language].map((group) => (
               <fieldset
                 key={group.title}
                 className="rounded-[1.75rem] border border-slate-200 bg-white/85 p-5 shadow-sm transition hover:-translate-y-1 hover:shadow-lg dark:border-slate-800 dark:bg-slate-900/75"
@@ -197,16 +194,14 @@ export default function HomeIndex() {
           className="scroll-mt-28"
         >
           <div className="mb-8">
-            <p className="text-sm font-semibold uppercase tracking-[0.25em] text-sky-600 dark:text-sky-300">
-              Experience
-            </p>
+            <p className="text-sm font-semibold uppercase tracking-[0.25em] text-sky-600 dark:text-sky-300">{content.experienceKicker}</p>
             <h2 className="mt-3 text-3xl font-bold text-slate-950 dark:text-white">
-              Selected work and product experience
+              {content.experienceTitle}
             </h2>
           </div>
 
           <div className="grid gap-6 lg:grid-cols-2">
-            {EXPERIENCES.map((experience) => (
+            {EXPERIENCES[language].map((experience) => (
               <article
                 key={experience.title}
                 className="flex h-full flex-col rounded-[2rem] border border-slate-200 bg-white/90 p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-xl dark:border-slate-800 dark:bg-slate-900/80"
@@ -253,7 +248,7 @@ export default function HomeIndex() {
                       target="_blank"
                       className="inline-flex rounded-full bg-slate-950 px-4 py-2 text-sm font-semibold text-white transition hover:bg-sky-600 dark:bg-white dark:text-slate-950 dark:hover:bg-sky-300"
                     >
-                      Visit project
+                      {content.visitProject}
                     </Link>
                   </div>
                 ) : null}

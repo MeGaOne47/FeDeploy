@@ -7,12 +7,15 @@ import { Menu, X } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { useTheme } from "next-themes";
 import { NAV_ITEMS, SITE_NAME } from "@/app/site-config";
+import LanguageToggle from "@/components/Layout/LanguageToggle";
+import { useLanguage } from "@/components/Layout/LanguageProvider";
 
 export default function HeaderComponent() {
   const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
   const { resolvedTheme, setTheme } = useTheme();
+  const { language } = useLanguage();
 
   useEffect(() => {
     setMounted(true);
@@ -36,7 +39,7 @@ export default function HeaderComponent() {
 
         <div className="hidden items-center gap-8 sm:flex">
           <ul className="flex items-center gap-6 text-sm font-medium text-slate-600 dark:text-slate-200">
-            {NAV_ITEMS.map((item) => (
+            {NAV_ITEMS[language].map((item) => (
               <li key={item.href}>
                 <Link
                   href={item.href}
@@ -64,6 +67,7 @@ export default function HeaderComponent() {
               <span className="h-5 w-5" />
             )}
           </button>
+          <LanguageToggle />
         </div>
 
         <div className="flex items-center gap-2 sm:hidden">
@@ -84,6 +88,8 @@ export default function HeaderComponent() {
             )}
           </button>
 
+          <LanguageToggle />
+
           <button
             type="button"
             onClick={() => setIsMenuOpen((prev) => !prev)}
@@ -99,7 +105,7 @@ export default function HeaderComponent() {
       {isMenuOpen && (
         <div className="border-t border-slate-200/70 bg-white px-4 py-4 dark:border-slate-800/70 dark:bg-slate-950 sm:hidden">
           <ul className="flex flex-col gap-3 text-sm font-medium text-slate-700 dark:text-slate-100">
-            {NAV_ITEMS.map((item) => (
+            {NAV_ITEMS[language].map((item) => (
               <li key={item.href}>
                 <Link
                   href={item.href}

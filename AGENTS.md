@@ -1,32 +1,56 @@
-# AGENTS
+# AGENTS.md
 
-## Project overview
-- This is a Next.js 14 project using the App Router, React 18, TypeScript, Tailwind CSS, Ant Design, and client-side theming via `next-themes`.
-- The project is structured with `app/` for routes and `components/` for reusable UI pieces.
-- The TypeScript alias `@/*` maps to the project root.
+## 1. PROJECT OVERVIEW
 
-## Build and development commands
-- `npm run dev` or `bun dev` — start local development server
-- `npm run build` — compile production build
-- `npm run start` — run production server
-- `npm run lint` — run Next.js linting
+Project là ứng dụng web sử dụng:
 
-## Architecture and conventions
-- Main route content lives in `app/page.tsx` and individual route folders under `app/`.
-- Shared page chrome is implemented in `components/Layout/AppShell.tsx`.
-- Global providers are assembled in `components/Layout/AppProviders.tsx`.
-- Site metadata, navigation, shellless-route settings, and content arrays are centralized in `app/site-config.ts`.
-- `SHELLLESS_ROUTES` defines routes that render without header/footer chrome.
-- UI components are organized into subfolders under `components/` by feature.
-- Use absolute imports with `@/` to access app files.
+- Next.js
+- React
+- TypeScript
+- Tailwind CSS
+- Node.js
+- pnpm
 
-## Important patterns
-- Avoid adding server-only logic in client components marked with `"use client"`.
-- Preserve the existing app shell and theme provider when changing page layout or route structure.
-- Keep site content and route metadata in `app/site-config.ts` rather than scattering it across pages.
+Agent phải đọc và hiểu cấu trúc project hiện tại trước khi thực hiện các thay đổi lớn.
 
-## Guidance for AI agents
-- Focus edits on `app/` for route and page changes, and `components/` for UI logic.
-- Use `app/site-config.ts` as the source of truth for site metadata, navigation, and feature flags.
-- When creating new pages, add `page.tsx` inside the new route folder under `app/`.
-- Maintain Tailwind and Next.js conventions; this project uses the standard Next.js app router with `metadata` exported from `app/site-config.ts`.
+---
+
+# 2. GENERAL RULES
+
+## 2.1. Không tự ý thay đổi phạm vi task
+
+Chỉ sửa những phần liên quan trực tiếp đến yêu cầu của user.
+
+Không tự ý:
+
+- Refactor toàn bộ project.
+- Đổi architecture.
+- Đổi framework.
+- Đổi UI/UX nếu không được yêu cầu.
+- Xóa component đang được sử dụng.
+- Xóa API đang được sử dụng.
+- Thay đổi database schema.
+- Thay đổi authentication.
+- Thay đổi dependency nếu không cần thiết.
+
+Nếu phát hiện vấn đề không liên quan đến task:
+
+1. Không tự ý sửa.
+2. Ghi chú vấn đề.
+3. Tiếp tục task nếu có thể.
+
+---
+
+# 3. PACKAGE MANAGER
+
+Project sử dụng `pnpm`.
+
+Luôn ưu tiên:
+
+```bash
+pnpm install
+pnpm dev
+pnpm build
+pnpm lint
+pnpm typecheck
+```
